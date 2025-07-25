@@ -1,0 +1,33 @@
+[
+	{
+		"name": "Digi School",
+		"description": "A modern and efficient School Management System built with Angular 16, featuring a responsive design and comprehensive functionality for managing school operations.",
+		"image": "/assets/images/projects/school.png",
+		"url": "https://github.com/YessinEleuchi/School-System-Management"
+	},
+  {
+    "name": "Bid TUN",
+    "description": "A modern auction platform built with React and Laravel, enabling users to create, track, and bid on products in real-time.",
+    "image": "/assets/images/projects/bid.png",
+    "url": "https://github.com/YessinEleuchi/ClientAuction"
+  },
+	{
+		"name": "Medical Appointment Platform",
+		"description": "FindDoctor is a modern web application built with React and Vite that connects patients with healthcare providers. This platform facilitates easy appointment scheduling, doctor search, and medical service management.",
+		"image": "/assets/images/projects/doctor.png",
+		"url": "https://github.com/YessinEleuchi/finddoctor-client"
+	},
+	
+	{
+		"name": " QuizMaster Pro",
+		"description": "QuizMaster Pro is a modern, multilingual quiz application built with Flutter and powered by Firebase. It offers an engaging quiz experience enhanced with real-time feedback, sound effects, score tracking, and push notifications — all wrapped in a beautiful and responsive interface.",
+		"image": "/assets/images/projects/flutter.png",
+		"url": "https://github.com/YessinEleuchi/QuizMaster-Pro?tab=readme-ov-file"
+	},
+  {
+    "name": "System Monitoring Application",
+    "description": "A robust and scalable system monitoring application built with FastAPI, designed to track and analyze application performance metrics in real-time.",
+    "image": "/assets/images/projects/monitoringp.png",
+    "url": "https://github.com/YessinEleuchi/system-monitoring-app"
+  }
+]
