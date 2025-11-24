@@ -1,23 +1,30 @@
 [
-	{
-		"dates": "June 2018 · Present",
-		"role": "Front-end Engineer",
-		"company": "Full Truck Alliance",
-		"description": "Responsible for customer service and CRM system front-end development.",
-		"logo": "/assets/images/experiences/fta.ico"
-	},
-	{
-		"dates": "July 2015 · June 2018",
-		"role": "Front-end Engineer",
-		"company": "YOHO!",
-		"description": "Responsible for mobile front-end development of e-commerce platform.",
-		"logo": "/assets/images/experiences/yoho.ico"
-	},
-	{
-		"dates": "September 2014 · July 2015 ",
-		"role": "Node.JS Developer",
-		"company": "WuLian",
-		"description": "Intern, involved in the development of Internet of Things cloud systems.",
-		"logo": "/assets/images/experiences/wulian.ico"
-	}
+  {
+    "dates": "Summer 2024 – Present",
+    "role": "Part-Time Software Engineer",
+    "company": "RunIt",
+    "description": "Leading full-stack development of TejFlow, an automation platform for accountants (React, Material UI, Zustand, Node.js, Express, MongoDB). Integrated with the Tunisian TEJ platform to fetch, classify, and archive certificates, with Excel report generation and a gamified points system.",
+    "logo": "/assets/logos/runit.jpg"
+  },
+  {
+    "dates": "Winter 2025 – Summer 2025",
+    "role": "Freelance Front-end Developer",
+    "company": "MyPartner ISC",
+    "description": "Built a reusable design system with ShadcnUI and Radix Primitives, and the onboarding front-end architecture for SaaS platforms using React 18, with clean separation of UI, state, and API layers.",
+    "logo": "/assets/logos/mypartner.jpg"
+  },
+  {
+    "dates": "Autumn 2024 – Summer 2025",
+    "role": "Software Engineer Intern",
+    "company": "INCENDO",
+    "description": "Developed a full-stack monitoring platform with FastAPI and React, adding HTTP status monitoring, automated health checks, and email alerts for distributed web services.",
+    "logo": "/assets/logos/incendo.jpg"
+  },
+  {
+    "dates": "Winter 2023 – Summer 2023",
+    "role": "IoT & Mobile Developer – Final Year Internship",
+    "company": "ISBS Sfax",
+    "description": "Built a smart soil monitoring station with IoT sensors and a mobile app, plus a drone spraying control system with remote task scheduling and manual override for precision agriculture.",
+    "logo": "/assets/logos/isbs.jpg"
+  }
 ]
