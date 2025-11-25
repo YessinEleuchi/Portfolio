@@ -1,108 +1,76 @@
 ---
 layout: ../../layouts/post.astro
-title: Lifting State Up in React - What, When, and Why
-description: "A beginner-friendly explanation of lifting state up in React — how and why to do it with examples."
-dateFormatted: Aug 1, 2025
+title: How I Use Zustand in TejFlow to Keep the UI Simple and Clean ?
+description: "A small post about how Zustand helps me manage shared state inside TejFlow without overcomplicating the React codebase."
+dateFormatted: July 20, 2025
 ---
 
+In **TejFlow**, I try to keep the frontend as clean and lightweight as possible.  
+The app has dashboards, filters, document views, client selectors, and several UI sections that need to stay in sync — and early on, I ran into a familiar React issue:
 
-When building a React app, one common challenge is making components talk to each other. For example, how do you make a child component update something in a sibling or parent? That’s where **“lifting state up”** comes in.
+➡️ **React state + Context was getting messy way too fast.**
 
-Let’s explore what it means, when to use it, and how to apply it with simple examples.
+Filters weren’t synced across the dashboard, some components re-rendered more than they should, and the code started feeling heavier than the simplicity I wanted for TejFlow.
 
-## ✅ What Is “Lifting State Up”?
+That’s when I switched to **Zustand**, a small state-management library that instantly made everything more predictable and much easier to maintain.
 
-In React, **state** belongs to the component where it is defined. But sometimes, two (or more) components need to share or modify the same piece of state.
-
-**Lifting state up** means **moving the state from a child component to the nearest common parent**, so that the state can be passed down via props and updated in one central place.
-
-## 🕰️ When Should You Lift State Up?
-
-You should lift state up when:
-- Two or more components need access to the same state.
-- One component needs to modify the state of another.
-- You want to manage logic in a single place to avoid duplication or inconsistency.
-
-## 🧩 Real-Life Analogy
-
-Imagine two people sharing a fridge. If each person keeps a separate grocery list, things get confusing. But if they write on **one shared list on the fridge**, both can add, remove, or read from it. The **fridge** is the shared parent component. The **list** is the lifted state.
-
-## 🛠️ Example: Temperature Converter
-
-Let’s say we’re building a Celsius ↔ Fahrenheit converter using two components:
-
-### 1. Child Components: `CelsiusInput` and `FahrenheitInput`
-
-```jsx
-function CelsiusInput({ value, onChange }) {
-  return (
-    <div>
-      <label>Celsius: </label>
-      <input value={value} onChange={e => onChange(e.target.value)} />
-    </div>
-  );
-}
-
-function FahrenheitInput({ value, onChange }) {
-  return (
-    <div>
-      <label>Fahrenheit: </label>
-      <input value={value} onChange={e => onChange(e.target.value)} />
-    </div>
-  );
-}
-```
-
-### 2. Parent Component: `TemperatureConverter`
-
-Here we **lift the state up** and handle all the logic in one place.
-
-```jsx
-function TemperatureConverter() {
-  const [temperature, setTemperature] = React.useState('');
-  const [scale, setScale] = React.useState('c');
-
-  const toFahrenheit = c => (c * 9) / 5 + 32;
-  const toCelsius = f => ((f - 32) * 5) / 9;
-
-  const handleCelsiusChange = value => {
-    setTemperature(value);
-    setScale('c');
-  };
-
-  const handleFahrenheitChange = value => {
-    setTemperature(value);
-    setScale('f');
-  };
-
-  const celsius = scale === 'f' ? toCelsius(temperature) : temperature;
-  const fahrenheit = scale === 'c' ? toFahrenheit(temperature) : temperature;
-
-  return (
-    <div>
-      <CelsiusInput value={celsius} onChange={handleCelsiusChange} />
-      <FahrenheitInput value={fahrenheit} onChange={handleFahrenheitChange} />
-    </div>
-  );
-}
-```
-
-Now, both input components are **in sync**, and the logic is centralized in the parent component.
-
-## 🎯 Why It Matters
-
-Lifting state up:
-- Keeps your app’s logic clean and centralized.
-- Helps components communicate effectively.
-- Prevents bugs from mismatched or duplicated state.
-- Makes it easier to debug and scale your app.
-
-## 💡 Takeaways
-
-- Think of **lifting state up** as **creating a single source of truth**.
-- Use it when multiple components rely on or update the same data.
-- Your UI becomes more consistent and easier to manage.
+🔗 **Zustand Docs:** https://github.com/pmndrs/zustand
 
 ---
 
-💬 *Got feedback or questions about lifting state up? Let me know on [GitHub](https://github.com)!*
+## 🐻 Why Zustand Fits TejFlow
+
+For a project like TejFlow, I don’t need a huge state-management framework.  
+What I need is something:
+
+- simple
+- predictable
+- easy to maintain
+- fast
+- and flexible enough for dashboard behavior
+
+Zustand does exactly that.
+
+It gives me global state **without the boilerplate**, and it lets different parts of the dashboard stay in sync without passing props everywhere.
+
+---
+
+## 🧠 A Real Example From TejFlow
+
+One example is the **certificate filters**.
+
+Multiple components use the same filter:
+
+- certificates table
+- Excel generator
+- sync history
+- sidebar stats
+
+Instead of lifting state up across three or four parent components, I just created a small Zustand store:
+
+```ts
+import { create } from "zustand";
+
+export const useFilters = create(set => ({
+  dateRange: null,
+  setDateRange: (value) => set({ dateRange: value }),
+}));
+```
+---
+## 🎯 The Impact on the Project
+
+Using Zustand inside TejFlow gave me:
+
+- a smoother dashboard
+
+- fewer re-renders
+
+- clean separation of UI logic
+
+- no giant Context files
+
+- no prop drilling
+
+- a codebase that’s much easier to extend
+
+For a project like TejFlow, where the UI needs to be simple and efficient, Zustand ended up being the perfect balance between power and minimalism.
