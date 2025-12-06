@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/post.astro
-title: A Note on How HCI Standards Quietly Improved TejFlow
+title: How HCI Improved TejFlow’s UI?
 description: "A short personal note about how basic HCI and ergonomics principles ended up shaping the UI of TejFlow more than I expected."
 dateFormatted: July 10, 2025
 ---
