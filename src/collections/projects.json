@@ -29,5 +29,11 @@
     "description": "A robust and scalable system monitoring application built with FastAPI, designed to track and analyze application performance metrics in real-time.",
     "image": "/assets/images/projects/monitoringp.png",
     "url": "https://github.com/YessinEleuchi/system-monitoring-app"
+  },
+  {
+    "name": "Automatic License Plate Recognition",
+    "description": "A robust and scalable automatic license plate recognition system built with Python and OpenCV, designed to identify and extract license plate information from images and video feeds.",
+    "image": "/assets/images/projects/alpr.png",
+    "url": "https://github.com/YessinEleuchi/ALPR-SERVER"
   }
 ]

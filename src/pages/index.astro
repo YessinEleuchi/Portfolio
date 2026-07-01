@@ -17,26 +17,55 @@ import Layout from "../layouts/main.astro";
         >
           Hello, I'm Yessine.
         </h1>
+
         <p class="mb-6 text-base text-neutral-600 dark:text-neutral-400">
-          I'm Yessine Eleuchi, a final-year Software Engineering student passionate about building smart and efficient web applications, automation systems, and AI-powered solutions.          <br
-            class="hidden lg:block"
-          />I love turning ideas into practical solutions through clean code, creative design, and continuous learning.
+          I'm Yessine Eleuchi, a Software Engineer specializing in full-stack
+          development, artificial intelligence, automation, and scalable web
+          solutions.
+          <br class="hidden lg:block" />
+          I enjoy transforming complex ideas into reliable and practical
+          applications through clean architecture, efficient code, and
+          continuous learning.
         </p>
+
         <p class="mb-2 font-semibold text-neutral-800 dark:text-neutral-200">
-          I can help you out with:
+          I can help you with:
         </p>
+
         <ul
           class="py-2 space-y-[3px] text-sm list-disc list-inside text-neutral-500 dark:text-neutral-400"
         >
-          <li>Frontend Development (React, TypeScript, Material UI, Tailwind CSS, Shadcn/UI)</li>
-          <li>Backend Development (Node.js/Express, Spring Boot, FastAPI)</li>
-          <li>Databases & APIs (PostgreSQL, MySQL, MongoDB, REST APIs)</li>
-          <li>Automation & DevOps (GitHub Actions, Docker, CI/CD)</li>
-          <li>Problem Solving & Algorithms</li>
+          <li>
+            Frontend Development — React, Next.js, TypeScript, Tailwind CSS,
+            Material UI, and shadcn/ui
+          </li>
 
+          <li>
+            Backend Development — Node.js, NestJS, Express, Spring Boot, and
+            FastAPI
+          </li>
+
+          <li>
+            Databases and APIs — PostgreSQL, MySQL, MongoDB, Redis, and REST APIs
+          </li>
+
+          <li>
+            Artificial Intelligence — LLM workflows, RAG systems, automation,
+            and computer vision
+          </li>
+
+          <li>
+            DevOps and Deployment — Docker, Jenkins, GitHub Actions, CI/CD, and
+            monitoring
+          </li>
         </ul>
-        <Button text="Follow me on 𝕏" link="https://x.com/EleuchiYessin" />
+
+        <Button
+          text="Follow me on 𝕏"
+          link="https://x.com/EleuchiYessin"
+        />
       </div>
+
       <div
         class="relative justify-end hidden w-full mt-10 md:flex md:pl-10 md:w-1/2 md:mt-0 md:translate-y-4 xl:translate-y-0"
       >
@@ -49,18 +78,22 @@ import Layout from "../layouts/main.astro";
             >
               <span
                 class="flex items-center justify-center w-full h-full bg-white border border-dashed rounded-full dark:bg-neutral-950 border-neutral-300 dark:border-neutral-700"
-              >👋</span
               >
+                👋
+              </span>
             </span>
           </div>
+
           <div class="relative z-30 px-10">
             <img
               src="/assets/images/img.png"
+              alt="Portrait of Yessine Eleuchi"
               loading="eager"
               decoding="auto"
               class="relative z-30 w-full aspect-[790/1189] md:max-w-md mx-auto dark:-translate-y-0.5"
             />
           </div>
+
           <div
             class="absolute bottom-0 right-0 z-20 w-full h-full lg:h-[420px] translate-x-0 -translate-y-px border border-dashed rounded-2xl bg-gradient-to-r dark:from-neutral-950 dark:via-black dark:to-neutral-950 from-white via-neutral-50 to-white border-neutral-300 dark:border-neutral-700"
           >
@@ -72,6 +105,7 @@ import Layout from "../layouts/main.astro";
 
   <Separator text="Check out my projects" />
   <Projects />
+
   <Separator text="Some of my writing" />
   <Writings />
 </Layout>

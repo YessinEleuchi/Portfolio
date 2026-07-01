@@ -1,11 +1,19 @@
 [
+
+   {
+    "dates": "Winter 2026 – Summer 2026",
+    "role": "Software Engineer Intern – Final Year Project",
+    "company": "PixiMind",
+    "description": "Designed and developed PixiEstim, an intelligent software project estimation platform. Built a full-stack architecture using Next.js, NestJS, FastAPI, PostgreSQL, Redis, MinIO, and Docker, with AI-powered document processing, feature extraction, RAG-based estimation, human validation, and CI/CD pipelines.",
+    "logo": "/assets/logos/pixi.svg"
+  },
   {
-    "dates": "Summer 2024 – Present",
+    "dates": "Summer 2024 – Winter 2026",
     "role": "Part-Time Software Engineer",
     "company": "RunIt",
     "description": "Leading full-stack development of TejFlow, an automation platform for accountants (React, Material UI, Zustand, Node.js, Express, MongoDB). Integrated with the Tunisian TEJ platform to fetch, classify, and archive certificates, with Excel report generation and a gamified points system.",
     "logo": "/assets/logos/runit.jpg"
-  },
+  }, 
   {
     "dates": "Winter 2025 – Summer 2025",
     "role": "Freelance Front-end Developer",
