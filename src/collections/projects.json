@@ -1,72 +1,383 @@
 [
   {
-    "slug": "pixiestim",
-    "name": "PixiEstim",
-    "category": "Full-Stack & Applied AI",
-    "description": "An intelligent software project estimation platform that automates document processing, feature extraction, complexity classification, and effort estimation using AI and RAG while keeping human validation at the core of the workflow.",
-    "image": "/assets/images/projects/pixiestim.webp",
-    "github": null,
-    "demo": null,
-    "architectureImage": "/assets/images/projects/pixiestim-architecture.webp",
+  "slug": "pixiestim",
+  "name": "PixiEstim",
+  "category": "Full-Stack & Applied AI",
 
-    "role": "Software Engineer — Full-Stack & Applied AI",
+  "description": "An intelligent software project estimation platform that transforms heterogeneous project documents into structured, AI-assisted software estimations through controlled LLM workflows, historical RAG context, deterministic business rules, and human validation.",
 
-    "problem": "Software project estimation requires teams to manually analyse project documents, identify functional requirements, associate those requirements with estimation scales, evaluate complexity, and consolidate the resulting estimates. This process can become repetitive, time-consuming, and difficult to standardize when several projects and stakeholders are involved.",
+  "image": "/assets/images/projects/pixiestim.webp",
 
-    "solution": "PixiEstim centralizes the complete estimation workflow in a single platform. Project documents are uploaded and processed asynchronously, functional features are automatically extracted, historical estimation knowledge can be retrieved through a RAG pipeline, and AI-assisted complexity estimations are generated while keeping Sales and Production teams in control through explicit validation steps.",
+  "architectureImage": "/assets/images/projects/pixiestim-architecture.webp",
 
-    "architecture": "PixiEstim uses a distributed architecture composed of a Next.js frontend, a NestJS backend responsible for business logic, and a dedicated FastAPI service for document processing and AI workloads. PostgreSQL and Prisma manage structured business data. Redis and BullMQ handle asynchronous jobs, MinIO stores uploaded project documents, Qdrant provides vector search over historical estimation knowledge, and Ollama hosts the local language and embedding models. The services are containerized with Docker and integrated into a Jenkins-based CI/CD workflow.",
+  "architectureCaption": "Logical architecture of PixiEstim showing the separation between the frontend, business backend, persistence layer, asynchronous processing, document storage, and AI services.",
 
-    "challenges": [
-      "Processing project documents without blocking requests handled by the main backend.",
-      "Extracting structured software features from heterogeneous specifications and uploaded documents.",
-      "Maintaining a reliable project state across document processing, feature extraction, validation, and estimation stages.",
-      "Retrieving useful historical estimations while avoiding irrelevant contextual information.",
-      "Combining AI-generated recommendations with deterministic business rules and estimation scales.",
-      "Keeping human validation at the center of the workflow instead of automatically accepting AI-generated results.",
-      "Coordinating frontend, backend, AI services, databases, object storage, queues, and vector search within a single workflow."
+  "github": null,
+  "demo": null,
+  "aiPipelineImage": "/assets/images/projects/pixiestim-ai-pipeline.webp",
+
+  "role": "Software Engineer — Full-Stack & Applied AI",
+
+  "problem": "Software project estimation at PixiMind relied heavily on manually reading heterogeneous requirements documents, identifying functional requirements, selecting the appropriate estimation scales, evaluating implementation complexity, and consolidating effort estimates. The process could become time-consuming, difficult to standardize, and strongly dependent on the experience of the people involved, especially when documents were large, incomplete, or ambiguous.",
+
+  "solution": "PixiEstim centralizes the software estimation workflow in a single platform. Project documents are uploaded and processed asynchronously, converted into structured and context-preserving segments, and analyzed through specialized AI workflows. The system proposes software features, associates validated features with internal estimation scales, evaluates their complexity, enriches decisions with similar historical cases through RAG, converts complexity levels into deterministic effort values, and keeps Sales and Production users in control through explicit human validation stages.",
+
+  "architecture": "PixiEstim follows a distributed architecture composed of a Next.js frontend, a NestJS backend responsible for business logic, authorization, workflow coordination, and persistence, and a dedicated FastAPI service responsible for document processing and AI orchestration. PostgreSQL and Prisma manage structured business data. Redis and BullMQ support asynchronous processing, MinIO stores uploaded project documents, Qdrant stores and retrieves historical estimation knowledge through vector search, and Ollama provides local LLM inference. The application components are containerized with Docker and integrated into Jenkins-based CI/CD workflows.",
+
+  "aiEngineering": {
+    "summary": "PixiEstim implements a controlled AI workflow rather than delegating the full estimation process to a language model. Each intelligent stage has a specific responsibility, limited context, specialized prompt, expected structured output, application-level validation, fallback rules, traceability, and human validation where required.",
+
+    "pipeline": [
+      {
+        "step": "Document ingestion",
+        "description": "Project documents are uploaded, stored in MinIO, and submitted to an asynchronous processing workflow instead of being processed directly inside the request lifecycle."
+      },
+      {
+        "step": "Document extraction",
+        "description": "FastAPI retrieves the document, detects its format, selects the appropriate extractor, and converts PDF, DOCX, or TXT content into a common internal representation."
+      },
+      {
+        "step": "Normalization and reconstruction",
+        "description": "Formatting noise and redundant visual information are removed while preserving section hierarchy, reading order, titles, paragraphs, lists, tables, and source provenance."
+      },
+      {
+        "step": "Contextual segmentation",
+        "description": "Large documents are divided along natural document boundaries into context-preserving segments compatible with the local model context window."
+      },
+      {
+        "step": "Project synthesis",
+        "description": "A specialized LLM call creates a global project context from the project name, main document sections, and relevant metadata before detailed feature extraction begins."
+      },
+      {
+        "step": "Progressive feature extraction",
+        "description": "Document segments are processed progressively in batches. Each batch receives the global project context and previously extracted feature titles to preserve coherence and reduce duplication."
+      },
+      {
+        "step": "Structured output validation",
+        "description": "Generated outputs are parsed as JSON and validated against expected fields, formatting rules, closed candidate lists, and application-level constraints before persistence."
+      },
+      {
+        "step": "Feature deduplication",
+        "description": "Generated feature titles are normalized and compared using a configurable similarity mechanism so strongly similar proposals can be consolidated before validation."
+      },
+      {
+        "step": "Human feature validation",
+        "description": "Generated features remain proposals. Authorized users can modify, remove, reorder, correct, or validate them, and only validated features can proceed to estimation."
+      },
+      {
+        "step": "Estimation-scale association",
+        "description": "Validated features are associated with one or more estimation scales selected for the current project. The model can only choose from the closed list of configured scales."
+      },
+      {
+        "step": "Historical RAG retrieval",
+        "description": "For each feature-scale pair, PixiEstim retrieves semantically similar historical estimation cases from Qdrant while applying metadata filtering and relevance controls."
+      },
+      {
+        "step": "Complexity classification",
+        "description": "The model evaluates each feature-scale pair using the current requirement, estimation scale, allowed complexity levels, and retrieved historical references."
+      },
+      {
+        "step": "Deterministic effort calculation",
+        "description": "The LLM does not generate arbitrary effort values. It selects a complexity level, and PixiEstim converts that level into effort using internally configured estimation values."
+      },
+      {
+        "step": "Human estimation validation",
+        "description": "Production users review scale associations, complexity levels, calculated effort, fallback cases, and unassigned features before validating the final estimation."
+      }
     ],
 
-    "decisions": [
-      "Separated AI and document-processing workloads into a dedicated FastAPI microservice instead of adding them directly to the NestJS backend.",
-      "Used Redis and BullMQ for long-running asynchronous processing so document analysis does not block the main API.",
-      "Used MinIO object storage for project files instead of storing binary documents directly in PostgreSQL.",
-      "Used PostgreSQL and Prisma for strongly structured business entities such as projects, users, clients, services, features, and estimations.",
-      "Used Qdrant to perform semantic retrieval over historical estimation knowledge.",
-      "Used locally hosted models through Ollama to keep control over the AI execution environment.",
-      "Introduced explicit validation stages for extracted features and generated estimations before they become part of the final project estimate.",
-      "Used project status transitions to expose asynchronous pipeline progress clearly to the frontend."
+    "promptEngineering": {
+      "strategy": "Task-specific prompts with constrained context, closed candidate sets, explicit rules, and structured outputs.",
+
+      "families": [
+        {
+          "name": "Project synthesis",
+          "purpose": "Build a global project understanding before detailed analysis.",
+          "output": "Structured project summary"
+        },
+        {
+          "name": "Feature extraction",
+          "purpose": "Identify functional requirements from document segments.",
+          "output": "Structured JSON list of software features"
+        },
+        {
+          "name": "Scale association",
+          "purpose": "Determine which configured technical estimation scales apply to each validated feature.",
+          "output": "JSON associations restricted to authorized project scales"
+        },
+        {
+          "name": "Complexity evaluation",
+          "purpose": "Classify each feature-scale pair according to the allowed complexity scale.",
+          "output": "One value from the predefined complexity levels"
+        }
+      ],
+
+      "controls": [
+        "Explicit model role for each AI task",
+        "Task-specific and limited context",
+        "Structured JSON output requirements",
+        "Closed lists of authorized estimation scales",
+        "Closed complexity scale",
+        "Explicit forbidden outputs",
+        "Application-level schema validation",
+        "Previously extracted feature titles included during progressive extraction"
+      ]
+    },
+
+    "rag": {
+      "purpose": "Ground complexity evaluation with comparable historical software estimation cases without treating historical decisions as automatic answers.",
+
+      "vectorDatabase": "Qdrant",
+
+      "knowledgeSource": "Historical software estimation cases imported from Excel or CSV files.",
+
+      "indexedContext": [
+        "Feature name",
+        "Estimation scale",
+        "Associated service",
+        "Concerned part"
+      ],
+
+      "storedMetadata": [
+        "Historical complexity",
+        "Reference identifier",
+        "Estimation scale",
+        "Associated service",
+        "Concerned part",
+        "Embedding/index version"
+      ],
+
+      "retrievalStrategy": "The current feature and estimation context are converted into a query using the same embedding configuration used during indexing. Qdrant then performs semantic similarity search with estimation-scale filtering.",
+
+      "topK": 2,
+
+      "similarityThreshold": 0.55,
+
+      "designDecisions": [
+        "Historical complexity is stored as metadata but excluded from the semantic text used to build the search vector.",
+        "The same embedding configuration and preprocessing are used for indexing and retrieval.",
+        "References are filtered according to the relevant estimation scale before being added to the prompt.",
+        "Only references meeting the configured similarity threshold are retained.",
+        "Historical references are presented to the model as comparison cases rather than answers to reproduce."
+      ]
+    },
+
+    "guardrails": [
+      {
+        "risk": "Unparsable model response",
+        "control": "JSON syntax validation",
+        "behavior": "The response is rejected or retried before persistence."
+      },
+      {
+        "risk": "Incomplete generated element",
+        "control": "Schema and required-field validation",
+        "behavior": "An invalid element can be discarded while keeping the remaining usable output."
+      },
+      {
+        "risk": "Duplicate generated features",
+        "control": "Normalization and similarity comparison",
+        "behavior": "Strongly similar proposals are consolidated before human validation."
+      },
+      {
+        "risk": "Unknown estimation scale",
+        "control": "Closed-list validation against project scales",
+        "behavior": "The association is rejected and the affected feature is flagged."
+      },
+      {
+        "risk": "Invalid or missing complexity",
+        "control": "Validation against the predefined five-level complexity scale",
+        "behavior": "A technical fallback is applied and the result is explicitly marked for human review."
+      },
+      {
+        "risk": "Out-of-domain historical reference",
+        "control": "Metadata filtering using the estimation scale",
+        "behavior": "The reference is excluded before augmented-context construction."
+      },
+      {
+        "risk": "Low-relevance historical reference",
+        "control": "Configurable similarity threshold",
+        "behavior": "The reference is not injected into the prompt and its absence remains traceable."
+      },
+      {
+        "risk": "Excessive RAG context",
+        "control": "Top-K result limitation",
+        "behavior": "Only the highest-ranked historical references are retained."
+      },
+      {
+        "risk": "No reliable historical reference",
+        "control": "Validation of retrieved-result count",
+        "behavior": "The estimation continues without historical context and this execution mode is reported."
+      },
+      {
+        "risk": "Blind reproduction of a historical estimate",
+        "control": "Explicit prompt instruction",
+        "behavior": "The model must reason from the current requirement and use historical cases only as comparison evidence."
+      }
     ],
 
-    "results": [
-      "Built an end-to-end estimation workflow from document upload to validated software effort estimation.",
-      "Automated the extraction and structuring of functional requirements from project documents.",
-      "Integrated historical estimation knowledge into the estimation process through a RAG pipeline.",
-      "Implemented asynchronous document processing to keep the application responsive during long-running AI operations.",
-      "Provided Sales and Production teams with a shared workflow for reviewing features and estimations.",
-      "Designed a modular architecture where business logic, AI workloads, storage, queues, and vector retrieval remain clearly separated."
+    "humanInTheLoop": {
+      "description": "Human validation is used as a control mechanism at two critical stages of the AI workflow.",
+
+      "stages": [
+        {
+          "stage": "Feature validation",
+          "description": "Production or authorized users can edit, remove, reorder, deduplicate, and validate generated functional requirements. Only validated features enter the estimation pipeline."
+        },
+        {
+          "stage": "Estimation validation",
+          "description": "Users review associated scales, complexity classifications, calculated effort, fallback values, and unassigned features before approving the final estimation."
+        }
+      ]
+    },
+
+    "observability": {
+      "tool": "Langfuse",
+
+      "integration": "Instrumentation is integrated around the FastAPI AI orchestration layer so a single execution can group observations from synthesis, extraction, scale association, RAG retrieval, and complexity evaluation.",
+
+      "tracked": [
+        "Project and execution identifier",
+        "Model",
+        "Prompt version",
+        "Constructed input",
+        "Raw model response",
+        "Validated application result",
+        "Execution duration",
+        "Token consumption when available",
+        "Retrieved RAG references",
+        "Retrieval similarity scores",
+        "Parsing errors",
+        "Validation errors",
+        "Fallback usage"
+      ],
+
+      "purpose": "Support debugging, compare prompt variants, identify slow AI workflow stages, examine retrieval context, detect recurrent failures, and distinguish raw LLM output from data accepted by the application."
+    },
+
+    "evaluation": {
+      "status": "Operational observability is implemented, while a formal offline retrieval-quality benchmark is not reported as a completed result.",
+
+      "currentlyObservable": [
+        "Execution duration",
+        "Prompt version",
+        "Model information",
+        "Raw output versus validated output",
+        "Retrieved references",
+        "Retrieval similarity scores",
+        "Parsing failures",
+        "Validation failures",
+        "Fallback usage",
+        "Token consumption when available"
+      ],
+
+      "recommendedOfflineMetrics": [
+        "Recall@K",
+        "MRR",
+        "RAG versus non-RAG estimation comparison",
+        "Exact complexity agreement with human validation",
+        "Within-one-level complexity agreement",
+        "Structured-output validity rate",
+        "Fallback rate",
+        "p50 inference latency",
+        "p95 inference latency"
+      ]
+    },
+
+    "reliability": [
+      "FastAPI isolates AI orchestration from the main NestJS business backend.",
+      "Each AI stage has one specialized responsibility instead of relying on a single monolithic prompt.",
+      "Structured LLM outputs are validated before persistence.",
+      "Asynchronous processing prevents long-running document operations from blocking normal application requests.",
+      "Intermediate workflow states and executions remain traceable.",
+      "Fallback values are visible and require verification instead of being silently accepted.",
+      "Only validated features can enter the estimation workflow.",
+      "Final AI-assisted estimations require human validation."
     ],
 
-    "stack": [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "NestJS",
-      "FastAPI",
-      "PostgreSQL",
-      "Prisma",
-      "Redis",
-      "BullMQ",
-      "MinIO",
-      "Qdrant",
-      "Ollama",
-      "OpenDataLoader",
-      "RAG",
-      "Docker",
-      "Jenkins",
-      "CI/CD"
+    "privacyAndCost": [
+      "Local inference through Ollama reduces dependence on external LLM providers.",
+      "Keeping inference local provides greater control over confidential project documents.",
+      "Contextual segmentation avoids unnecessarily sending entire large documents to the model.",
+      "Local execution helps control operating costs while still consuming local compute resources.",
+      "Observability traces must limit unnecessary exposure of sensitive business information."
     ]
+    
   },
+
+  "challenges": [
+    "Processing heterogeneous and potentially large project documents without blocking the main application.",
+    "Preserving semantic structure and source context while converting PDF, DOCX, and TXT documents into AI-ready representations.",
+    "Adapting large documents to the limited context window of a locally hosted language model.",
+    "Extracting coherent software features progressively without losing the global project context.",
+    "Preventing malformed, incomplete, duplicated, or out-of-domain LLM outputs from entering the business workflow.",
+    "Associating generated features only with estimation scales authorized for the current project.",
+    "Retrieving relevant historical examples without introducing unrelated or overly influential references.",
+    "Keeping AI-generated recommendations under human control throughout feature generation and estimation.",
+    "Maintaining traceability across document processing, LLM calls, RAG retrieval, validation, fallback, and persistence stages.",
+    "Coordinating frontend, backend, AI services, PostgreSQL, Redis, BullMQ, MinIO, Qdrant, Ollama, and observability components within one workflow."
+  ],
+
+  "decisions": [
+    "Separated AI and document-processing responsibilities into a dedicated FastAPI service while keeping business rules, authorization, and persistence inside NestJS.",
+    "Used Redis and BullMQ for asynchronous processing so document ingestion and AI workloads do not block the main application API.",
+    "Used MinIO object storage for uploaded project documents instead of storing binary files directly in PostgreSQL.",
+    "Used PostgreSQL and Prisma for structured business entities such as projects, users, clients, services, estimation scales, features, and estimation history.",
+    "Converted heterogeneous documents into a common internal representation before AI processing.",
+    "Used contextual segmentation based on natural document boundaries rather than fixed character-based chunking.",
+    "Used specialized prompts for project synthesis, feature extraction, scale association, and complexity evaluation instead of one general-purpose prompt.",
+    "Used structured JSON outputs and application-level validation around LLM responses.",
+    "Restricted estimation-scale associations and complexity classifications to closed lists of authorized values.",
+    "Used Qdrant to retrieve semantically similar historical estimation cases.",
+    "Excluded historical complexity from the embedded search text so the target value does not directly influence semantic similarity.",
+    "Applied scale-based filtering, Top-K retrieval, and a configurable similarity threshold before injecting historical context.",
+    "Converted AI-selected complexity levels into effort through deterministic business values instead of allowing the LLM to invent durations.",
+    "Introduced human validation between feature generation and estimation and again before final estimation approval.",
+    "Instrumented intelligent workflows through Langfuse to trace prompts, responses, retrieval context, durations, errors, and fallback behavior.",
+    "Used local inference through Ollama to improve control over confidentiality, external dependencies, and operating costs.",
+    "Containerized application services with Docker and automated build and deployment workflows through Jenkins."
+  ],
+
+  "results": [
+    "Built an end-to-end workflow from project-document ingestion to validated software effort estimation.",
+    "Implemented asynchronous document ingestion and processing across NestJS, Redis, BullMQ, MinIO, and FastAPI.",
+    "Created a document-preparation pipeline covering extraction, normalization, structural reconstruction, contextual segmentation, persistence, and source traceability.",
+    "Implemented specialized LLM workflows for project synthesis, software-feature extraction, estimation-scale association, and complexity classification.",
+    "Added structured-output validation, deduplication, fallback handling, and business-rule enforcement around LLM responses.",
+    "Introduced human-in-the-loop validation before estimation and before final result approval.",
+    "Implemented deterministic conversion from AI-classified complexity to company-configured effort values.",
+    "Integrated historical estimation knowledge through a Qdrant-based RAG pipeline.",
+    "Implemented filtered semantic retrieval with Top-K = 2 and a configurable similarity threshold of 0.55.",
+    "Added RAG guardrails for domain filtering, low-relevance references, excessive context, missing references, and invalid complexity values.",
+    "Added observability for AI workflows through Langfuse, including model and prompt information, inputs, raw and validated outputs, durations, retrieval references, similarity scores, errors, and fallback behavior.",
+    "Containerized the frontend, backend, AI service, and supporting infrastructure and integrated them into Jenkins-based CI/CD workflows."
+  ],
+
+  "stack": [
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "NestJS",
+    "FastAPI",
+    "Python",
+    "PostgreSQL",
+    "Prisma",
+    "Redis",
+    "BullMQ",
+    "MinIO",
+    "Qdrant",
+    "Ollama",
+    "OpenDataLoader",
+    "RAG",
+    "Prompt Engineering",
+    "Human-in-the-Loop",
+    "Langfuse",
+    "Docker",
+    "Docker Compose",
+    "Jenkins",
+    "CI/CD"
+  ]
+},
 
   {
     "slug": "tejflow",

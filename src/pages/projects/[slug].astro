@@ -1,6 +1,7 @@
 ---
 import projects from "../../collections/projects.json";
 import Layout from "../../layouts/main.astro";
+import AIEngineering from "../../components/project/ai-engineering.astro";
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -214,6 +215,17 @@ const { project } = Astro.props;
         )
       }
     </section>
+  )
+}
+
+<!-- AI ENGINEERING -->
+{
+  project.aiEngineering && (
+    <AIEngineering
+      ai={project.aiEngineering}
+      projectName={project.name}
+      pipelineImage={project.aiPipelineImage}
+    />
   )
 }
 
