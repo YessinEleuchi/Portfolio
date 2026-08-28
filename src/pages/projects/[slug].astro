@@ -171,24 +171,51 @@ const { project } = Astro.props;
     }
 
     <!-- ARCHITECTURE -->
-    {
-      project.architecture && (
-        <section class="mb-12">
-          <h2
-            class="mb-4 text-2xl font-semibold
-                   text-neutral-900 dark:text-white"
-          >
-            Architecture
-          </h2>
+   {
+  project.architecture && (
+    <section class="mb-14">
+      <h2
+        class="mb-4 text-2xl font-semibold
+               text-neutral-900 dark:text-white"
+      >
+        System Architecture
+      </h2>
 
-          <p
-            class="leading-7 text-neutral-600 dark:text-neutral-400"
-          >
-            {project.architecture}
-          </p>
-        </section>
-      )
-    }
+      <p
+        class="leading-7 text-neutral-600 dark:text-neutral-400"
+      >
+        {project.architecture}
+      </p>
+
+      {
+        project.architectureImage && (
+          <figure class="mt-7">
+            <div
+              class="overflow-hidden border rounded-2xl
+                     border-neutral-200 dark:border-neutral-800"
+            >
+              <img
+                src={project.architectureImage}
+                alt={`${project.name} system architecture`}
+                loading="lazy"
+                decoding="async"
+                class="w-full h-auto"
+              />
+            </div>
+
+            <figcaption
+              class="mt-3 text-xs leading-relaxed
+                     text-neutral-500 dark:text-neutral-500"
+            >
+              System architecture illustrating the main services,
+              infrastructure components, and communication flows.
+            </figcaption>
+          </figure>
+        )
+      }
+    </section>
+  )
+}
 
     <!-- CHALLENGES -->
     {

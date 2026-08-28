@@ -4,9 +4,10 @@
     "name": "PixiEstim",
     "category": "Full-Stack & Applied AI",
     "description": "An intelligent software project estimation platform that automates document processing, feature extraction, complexity classification, and effort estimation using AI and RAG while keeping human validation at the core of the workflow.",
-    "image": "/assets/images/projects/pixiestim.png",
+    "image": "/assets/images/projects/pixiestim.webp",
     "github": null,
     "demo": null,
+    "architectureImage": "/assets/images/projects/pixiestim-architecture.webp",
 
     "role": "Software Engineer — Full-Stack & Applied AI",
 
@@ -72,7 +73,7 @@
     "name": "TejFlow",
     "category": "Full-Stack Business Automation",
     "description": "A business automation platform designed for accountants to retrieve, classify, archive, and manage Tunisian TEJ certificates while simplifying reporting and repetitive administrative workflows.",
-    "image": "/assets/images/projects/tejflow.png",
+    "image": "/assets/images/projects/tejflow.webp",
     "imageCaption": "Illustrative mockup — not an actual production screenshot. Data and interface elements are fictionalized for portfolio presentation.",
     "github": null,
     "demo": null,
@@ -121,7 +122,9 @@
       "MongoDB",
       "REST API",
       "Automation",
-      "Playwright"
+      "Playwright",
+      "pdfjs"
+
     ]
   },
 
@@ -130,7 +133,7 @@
     "name": "System Monitoring Application",
     "category": "Backend Engineering & Observability",
     "description": "A monitoring platform built with FastAPI to track endpoint availability, application performance metrics, and threshold violations through a centralized backend service.",
-    "image": "/assets/images/projects/monitoringp.png",
+    "image": "/assets/images/projects/monitoringp.webp",
     "github": "https://github.com/YessinEleuchi/system-monitoring-app",
     "demo": null,
 
@@ -185,7 +188,7 @@
     "name": "Automatic License Plate Recognition",
     "category": "Computer Vision & Applied AI",
     "description": "An AI-powered backend combining automatic license plate recognition, vehicle and violation management, and a RAG-based legal assistant for Tunisian traffic-law queries.",
-    "image": "/assets/images/projects/alpr.png",
+    "image": "/assets/images/projects/alpr.webp",
     "github": "https://github.com/YessinEleuchi/ALPR-SERVER",
     "demo": null,
 
@@ -248,7 +251,7 @@
     "name": "Digi School",
     "category": "Full-Stack Web Development",
     "description": "A school management system built around a Laravel backend with secure authentication, background jobs, testing, and a responsive web interface.",
-    "image": "/assets/images/projects/school.png",
+    "image": "/assets/images/projects/school.webp",
     "github": "https://github.com/YessinEleuchi/School-System-Management",
     "demo": null,
 
@@ -303,7 +306,7 @@
     "name": "Bid TUN",
     "category": "Real-Time Full-Stack Development",
     "description": "A full-stack auction platform allowing users to create and manage auctions, place bids, receive live notifications, and track auction activity in real time.",
-    "image": "/assets/images/projects/bid.png",
+    "image": "/assets/images/projects/bid.webp",
     "github": "https://github.com/YessinEleuchi/ClientAuction",
     "demo": null,
 
@@ -363,7 +366,7 @@
     "name": "Medical Appointment Platform",
     "category": "Frontend Web Application",
     "description": "A responsive healthcare application connecting patients with healthcare providers through doctor discovery, appointment scheduling, notifications, and administrative interfaces.",
-    "image": "/assets/images/projects/doctor.png",
+    "image": "/assets/images/projects/doctor.webp",
     "github": "https://github.com/YessinEleuchi/finddoctor-client",
     "demo": null,
 
@@ -418,7 +421,7 @@
     "name": "QuizMaster Pro",
     "category": "Cross-Platform Mobile Development",
     "description": "A multilingual Flutter quiz application combining Firebase services, persistent score tracking, push notifications, localization, theming, and interactive user feedback.",
-    "image": "/assets/images/projects/flutter.png",
+    "image": "/assets/images/projects/flutter.webp",
     "github": "https://github.com/YessinEleuchi/QuizMaster-Pro",
     "demo": null,
 

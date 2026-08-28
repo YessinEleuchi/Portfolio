@@ -277,7 +277,7 @@ public/assets/images/
 They can be referenced using:
 
 ```
-/assets/images/example.png
+/assets/images/example.webp
 ```
 
 ---
