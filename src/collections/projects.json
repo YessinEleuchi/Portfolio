@@ -1,39 +1,473 @@
 [
-	{
-		"name": "Digi School",
-		"description": "A modern and efficient School Management System built with Angular 16, featuring a responsive design and comprehensive functionality for managing school operations.",
-		"image": "/assets/images/projects/school.png",
-		"url": "https://github.com/YessinEleuchi/School-System-Management"
-	},
   {
-    "name": "Bid TUN",
-    "description": "A modern auction platform built with React and Laravel, enabling users to create, track, and bid on products in real-time.",
-    "image": "/assets/images/projects/bid.png",
-    "url": "https://github.com/YessinEleuchi/ClientAuction"
+    "slug": "pixiestim",
+    "name": "PixiEstim",
+    "category": "Full-Stack & Applied AI",
+    "description": "An intelligent software project estimation platform that automates document processing, feature extraction, complexity classification, and effort estimation using AI and RAG while keeping human validation at the core of the workflow.",
+    "image": "/assets/images/projects/pixiestim.png",
+    "github": null,
+    "demo": null,
+
+    "role": "Software Engineer — Full-Stack & Applied AI",
+
+    "problem": "Software project estimation requires teams to manually analyse project documents, identify functional requirements, associate those requirements with estimation scales, evaluate complexity, and consolidate the resulting estimates. This process can become repetitive, time-consuming, and difficult to standardize when several projects and stakeholders are involved.",
+
+    "solution": "PixiEstim centralizes the complete estimation workflow in a single platform. Project documents are uploaded and processed asynchronously, functional features are automatically extracted, historical estimation knowledge can be retrieved through a RAG pipeline, and AI-assisted complexity estimations are generated while keeping Sales and Production teams in control through explicit validation steps.",
+
+    "architecture": "PixiEstim uses a distributed architecture composed of a Next.js frontend, a NestJS backend responsible for business logic, and a dedicated FastAPI service for document processing and AI workloads. PostgreSQL and Prisma manage structured business data. Redis and BullMQ handle asynchronous jobs, MinIO stores uploaded project documents, Qdrant provides vector search over historical estimation knowledge, and Ollama hosts the local language and embedding models. The services are containerized with Docker and integrated into a Jenkins-based CI/CD workflow.",
+
+    "challenges": [
+      "Processing project documents without blocking requests handled by the main backend.",
+      "Extracting structured software features from heterogeneous specifications and uploaded documents.",
+      "Maintaining a reliable project state across document processing, feature extraction, validation, and estimation stages.",
+      "Retrieving useful historical estimations while avoiding irrelevant contextual information.",
+      "Combining AI-generated recommendations with deterministic business rules and estimation scales.",
+      "Keeping human validation at the center of the workflow instead of automatically accepting AI-generated results.",
+      "Coordinating frontend, backend, AI services, databases, object storage, queues, and vector search within a single workflow."
+    ],
+
+    "decisions": [
+      "Separated AI and document-processing workloads into a dedicated FastAPI microservice instead of adding them directly to the NestJS backend.",
+      "Used Redis and BullMQ for long-running asynchronous processing so document analysis does not block the main API.",
+      "Used MinIO object storage for project files instead of storing binary documents directly in PostgreSQL.",
+      "Used PostgreSQL and Prisma for strongly structured business entities such as projects, users, clients, services, features, and estimations.",
+      "Used Qdrant to perform semantic retrieval over historical estimation knowledge.",
+      "Used locally hosted models through Ollama to keep control over the AI execution environment.",
+      "Introduced explicit validation stages for extracted features and generated estimations before they become part of the final project estimate.",
+      "Used project status transitions to expose asynchronous pipeline progress clearly to the frontend."
+    ],
+
+    "results": [
+      "Built an end-to-end estimation workflow from document upload to validated software effort estimation.",
+      "Automated the extraction and structuring of functional requirements from project documents.",
+      "Integrated historical estimation knowledge into the estimation process through a RAG pipeline.",
+      "Implemented asynchronous document processing to keep the application responsive during long-running AI operations.",
+      "Provided Sales and Production teams with a shared workflow for reviewing features and estimations.",
+      "Designed a modular architecture where business logic, AI workloads, storage, queues, and vector retrieval remain clearly separated."
+    ],
+
+    "stack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "NestJS",
+      "FastAPI",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "BullMQ",
+      "MinIO",
+      "Qdrant",
+      "Ollama",
+      "OpenDataLoader",
+      "RAG",
+      "Docker",
+      "Jenkins",
+      "CI/CD"
+    ]
   },
-	{
-		"name": "Medical Appointment Platform",
-		"description": "FindDoctor is a modern web application built with React and Vite that connects patients with healthcare providers. This platform facilitates easy appointment scheduling, doctor search, and medical service management.",
-		"image": "/assets/images/projects/doctor.png",
-		"url": "https://github.com/YessinEleuchi/finddoctor-client"
-	},
-	
-	{
-		"name": " QuizMaster Pro",
-		"description": "QuizMaster Pro is a modern, multilingual quiz application built with Flutter and powered by Firebase. It offers an engaging quiz experience enhanced with real-time feedback, sound effects, score tracking, and push notifications — all wrapped in a beautiful and responsive interface.",
-		"image": "/assets/images/projects/flutter.png",
-		"url": "https://github.com/YessinEleuchi/QuizMaster-Pro?tab=readme-ov-file"
-	},
+
   {
+    "slug": "tejflow",
+    "name": "TejFlow",
+    "category": "Full-Stack Business Automation",
+    "description": "A business automation platform designed for accountants to retrieve, classify, archive, and manage Tunisian TEJ certificates while simplifying reporting and repetitive administrative workflows.",
+    "image": "/assets/images/projects/tejflow.png",
+    "imageCaption": "Illustrative mockup — not an actual production screenshot. Data and interface elements are fictionalized for portfolio presentation.",
+    "github": null,
+    "demo": null,
+
+    "role": "Full-Stack Software Engineer",
+
+    "problem": "Managing large numbers of TEJ certificates required accountants to perform repetitive administrative operations such as retrieving certificates, identifying their associated information, organizing documents, checking processing status, archiving records, and preparing data for reporting.",
+
+    "solution": "TejFlow centralizes certificate-related workflows in a dedicated business application. It reduces repetitive operations by automating certificate retrieval and organization while providing accountants with structured views for classification, tracking, archiving, reporting, and day-to-day management.",
+
+    "architecture": "TejFlow follows a client-server architecture with a React frontend and a Node.js/Express backend exposed through REST APIs. MongoDB stores certificate and workflow information, Zustand manages lightweight application state on the frontend, and Material UI provides reusable components for the business interface. Automation logic is implemented at the backend and integrated directly into the accountant workflow.",
+
+    "challenges": [
+      "Transforming an existing manual accounting workflow into a structured digital process.",
+      "Automating repetitive certificate-management operations without making the workflow harder for accountants to understand.",
+      "Normalizing and classifying certificate information consistently.",
+      "Managing potentially large collections of certificates and their processing states.",
+      "Keeping client-side state synchronized after automated backend operations.",
+      "Designing an interface suitable for frequent use by non-technical business users."
+    ],
+
+    "decisions": [
+      "Used React and Material UI to build a modular and business-oriented user interface.",
+      "Used Zustand instead of a heavier state-management solution to keep frontend state management simple.",
+      "Separated frontend and backend responsibilities through REST APIs.",
+      "Used MongoDB to support flexible certificate and workflow data structures.",
+      "Implemented automation directly around existing accounting operations rather than adding unnecessary AI complexity.",
+      "Designed certificate statuses and views around the real workflow followed by accountants."
+    ],
+
+    "results": [
+      "Centralized certificate retrieval, classification, tracking, and archiving within one application.",
+      "Reduced repetitive manual operations involved in certificate management.",
+      "Improved visibility over the status and organization of certificate records.",
+      "Simplified access to information required for accounting and reporting workflows.",
+      "Built a reusable full-stack architecture focused on business process automation."
+    ],
+
+    "stack": [
+      "React",
+      "JavaScript",
+      "Material UI",
+      "Zustand",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "REST API",
+      "Automation",
+      "Playwright"
+    ]
+  },
+
+  {
+    "slug": "system-monitoring",
     "name": "System Monitoring Application",
-    "description": "A robust and scalable system monitoring application built with FastAPI, designed to track and analyze application performance metrics in real-time.",
+    "category": "Backend Engineering & Observability",
+    "description": "A monitoring platform built with FastAPI to track endpoint availability, application performance metrics, and threshold violations through a centralized backend service.",
     "image": "/assets/images/projects/monitoringp.png",
-    "url": "https://github.com/YessinEleuchi/system-monitoring-app"
+    "github": "https://github.com/YessinEleuchi/system-monitoring-app",
+    "demo": null,
+
+    "role": "Backend Developer",
+
+    "problem": "Applications and APIs require continuous visibility into endpoint availability and performance. Without centralized monitoring, failures, degraded response times, and threshold violations may remain unnoticed until they affect users.",
+
+    "solution": "The application provides a centralized monitoring backend capable of performing endpoint health checks, tracking performance metrics, authenticating users, and generating alerts when monitored values exceed configured thresholds.",
+
+    "architecture": "The backend is implemented with FastAPI and structured into routers, services, schemas, models, and core modules. MySQL stores monitoring data through SQLAlchemy, APScheduler executes scheduled monitoring operations, HTTPX performs HTTP requests against monitored endpoints, and Pydantic validates API data.",
+
+    "challenges": [
+      "Running recurring endpoint checks without coupling scheduled tasks to API requests.",
+      "Recording monitoring metrics in a structured form suitable for later analysis.",
+      "Handling unavailable or slow endpoints without breaking the monitoring process.",
+      "Defining threshold-based alert conditions.",
+      "Separating API routes, business logic, validation, persistence, and monitoring services."
+    ],
+
+    "decisions": [
+      "Used FastAPI to provide an asynchronous and strongly typed REST API.",
+      "Used APScheduler to execute recurring monitoring tasks.",
+      "Used HTTPX for HTTP health checks and monitored endpoint communication.",
+      "Used SQLAlchemy to separate persistence logic from the database implementation.",
+      "Used Pydantic schemas for request and response validation.",
+      "Structured the application into routers, services, models, schemas, and core modules."
+    ],
+
+    "results": [
+      "Implemented real-time endpoint health monitoring.",
+      "Added performance metric tracking for monitored applications.",
+      "Implemented configurable alerts for threshold violations.",
+      "Added authentication and authorization around monitoring functionality.",
+      "Built a modular FastAPI backend that can be extended with additional monitoring capabilities."
+    ],
+
+    "stack": [
+      "Python",
+      "FastAPI",
+      "MySQL",
+      "SQLAlchemy",
+      "APScheduler",
+      "HTTPX",
+      "Pydantic",
+      "REST API",
+      "Monitoring"
+    ]
   },
+
   {
+    "slug": "automatic-license-plate-recognition",
     "name": "Automatic License Plate Recognition",
-    "description": "A robust and scalable automatic license plate recognition system built with Python and OpenCV, designed to identify and extract license plate information from images and video feeds.",
+    "category": "Computer Vision & Applied AI",
+    "description": "An AI-powered backend combining automatic license plate recognition, vehicle and violation management, and a RAG-based legal assistant for Tunisian traffic-law queries.",
     "image": "/assets/images/projects/alpr.png",
-    "url": "https://github.com/YessinEleuchi/ALPR-SERVER"
+    "github": "https://github.com/YessinEleuchi/ALPR-SERVER",
+    "demo": null,
+
+    "role": "AI & Backend Developer",
+
+    "problem": "Vehicle identification systems need to transform visual information into structured vehicle records while also giving operators efficient access to contextual information such as violations, payments, and applicable traffic regulations.",
+
+    "solution": "The project combines an ALPR pipeline based on YOLOv8 and OCR with a FastAPI backend for vehicle dossiers and violations. It also integrates a RAG-powered legal assistant that retrieves traffic-law information and uses a Mistral language model to answer contextual legal questions. An agent mode can invoke application tools for more complex vehicle-related queries.",
+
+    "architecture": "FastAPI exposes the ALPR, vehicle, chat, and agent APIs. Images are processed through a YOLOv8-based plate detection pipeline followed by OCR and plate normalization. MongoDB stores vehicle, violation, and payment data. Legal documents are indexed into a FAISS vector index for retrieval, while Mistral generates answers based on the retrieved context. Repository and service layers isolate persistence and business logic.",
+
+    "challenges": [
+      "Detecting license plates from images under varying image conditions.",
+      "Converting OCR output into normalized and usable license plate identifiers.",
+      "Connecting recognition results with persistent vehicle and violation records.",
+      "Retrieving relevant traffic-law passages for legal questions.",
+      "Combining vehicle context with RAG-based legal responses.",
+      "Exposing AI and computer-vision operations through clean backend APIs.",
+      "Supporting both conversational questions and tool-driven agent operations."
+    ],
+
+    "decisions": [
+      "Used YOLOv8 for license plate detection and segmentation.",
+      "Separated plate detection, OCR, and normalization into dedicated ALPR modules.",
+      "Used MongoDB for vehicle, violation, and payment documents.",
+      "Used FastAPI to expose recognition and AI functionality through REST endpoints.",
+      "Used FAISS to index and retrieve relevant traffic-law documents.",
+      "Integrated Mistral for language-model responses based on retrieved legal context.",
+      "Created a separate agent endpoint capable of using application tools for structured operations.",
+      "Separated API routes, repositories, services, schemas, RAG logic, and LLM integration into distinct modules."
+    ],
+
+    "results": [
+      "Built a complete backend pipeline from uploaded vehicle image to recognized plate.",
+      "Connected recognized plates with vehicle, violation, and payment information.",
+      "Added a RAG-powered assistant for questions related to Tunisian traffic regulations.",
+      "Implemented contextual legal queries using both retrieved documents and vehicle information.",
+      "Added an agent mode for tool-based operations.",
+      "Designed the backend so computer vision, persistence, RAG, and LLM components remain independently maintainable."
+    ],
+
+    "stack": [
+      "Python",
+      "FastAPI",
+      "YOLOv8",
+      "OCR",
+      "Computer Vision",
+      "MongoDB",
+      "FAISS",
+      "RAG",
+      "Mistral LLM",
+      "Pydantic",
+      "REST API",
+      "Agent Tools"
+    ]
+  },
+
+  {
+    "slug": "digi-school",
+    "name": "Digi School",
+    "category": "Full-Stack Web Development",
+    "description": "A school management system built around a Laravel backend with secure authentication, background jobs, testing, and a responsive web interface.",
+    "image": "/assets/images/projects/school.png",
+    "github": "https://github.com/YessinEleuchi/School-System-Management",
+    "demo": null,
+
+    "role": "Full-Stack Developer",
+
+    "problem": "Educational institutions need centralized applications for managing school-related information and operations instead of relying on fragmented manual processes and disconnected tools.",
+
+    "solution": "Digi School provides a centralized school-management application with authenticated access, API-based functionality, responsive interfaces, background processing, and a backend architecture designed around Laravel conventions.",
+
+    "architecture": "The application uses Laravel 11 and PHP for backend and application logic, JWT and Laravel Sanctum for authentication, Tailwind CSS for the interface, Vite for frontend asset bundling, and Laravel queues for background tasks. Pest PHP is used for automated testing.",
+
+    "challenges": [
+      "Structuring a school-management domain containing multiple related business entities.",
+      "Protecting application functionality through authentication and authorization.",
+      "Separating synchronous user operations from background processing.",
+      "Providing a responsive interface suitable for different screen sizes.",
+      "Keeping application behavior testable while the domain grows."
+    ],
+
+    "decisions": [
+      "Used Laravel to benefit from its structured MVC ecosystem and built-in application services.",
+      "Used JWT and Laravel Sanctum for secure authentication.",
+      "Used Laravel queues for operations that can be processed outside the main request lifecycle.",
+      "Used Tailwind CSS to build a responsive interface.",
+      "Used Pest PHP to introduce automated testing.",
+      "Used Vite for frontend asset development and bundling."
+    ],
+
+    "results": [
+      "Built a structured application foundation for school-management workflows.",
+      "Implemented secure authentication and protected application functionality.",
+      "Added background job processing through Laravel queues.",
+      "Created a responsive web interface.",
+      "Added automated tests using Pest PHP."
+    ],
+
+    "stack": [
+      "PHP",
+      "Laravel 11",
+      "JWT",
+      "Laravel Sanctum",
+      "Tailwind CSS",
+      "Vite",
+      "Laravel Queue",
+      "Pest PHP",
+      "REST API"
+    ]
+  },
+
+  {
+    "slug": "bid-tun",
+    "name": "Bid TUN",
+    "category": "Real-Time Full-Stack Development",
+    "description": "A full-stack auction platform allowing users to create and manage auctions, place bids, receive live notifications, and track auction activity in real time.",
+    "image": "/assets/images/projects/bid.png",
+    "github": "https://github.com/YessinEleuchi/ClientAuction",
+    "demo": null,
+
+    "role": "Full-Stack Developer",
+
+    "problem": "Online auctions require multiple users to interact with the same listings while bids, auction states, and notifications change continuously. Traditional request-response interfaces can provide outdated information during active auctions.",
+
+    "solution": "Bid TUN provides a full-stack auction experience where authenticated users can create listings, manage profiles, place bids, follow active auctions, receive live notifications, and visualize auction-related information.",
+
+    "architecture": "The frontend is built with React, Chakra UI, Redux Toolkit, React Router, and Axios. Laravel provides the backend API with Laravel Sanctum for authentication and MySQL for persistence. Pusher and Laravel Echo provide real-time WebSocket communication for bid and notification updates. Docker configuration supports containerized deployment.",
+
+    "challenges": [
+      "Keeping auction state synchronized across multiple connected users.",
+      "Delivering bid and notification updates without requiring manual page refreshes.",
+      "Managing authenticated frontend and backend communication.",
+      "Maintaining predictable application state across listings, bids, profiles, and notifications.",
+      "Designing responsive auction interfaces around rapidly changing data."
+    ],
+
+    "decisions": [
+      "Used React for a component-based interactive frontend.",
+      "Used Redux Toolkit for centralized client-side application state.",
+      "Used Laravel and MySQL for backend business logic and persistence.",
+      "Used Laravel Sanctum for authenticated API access.",
+      "Integrated Pusher and Laravel Echo for WebSocket-based real-time updates.",
+      "Used Chakra UI to create reusable responsive interface components.",
+      "Added Docker configuration to simplify application packaging and deployment."
+    ],
+
+    "results": [
+      "Implemented auction creation and management.",
+      "Built a real-time bidding workflow.",
+      "Added live notifications through WebSockets.",
+      "Implemented secure user authentication and profile management.",
+      "Added auction analytics and responsive listing interfaces.",
+      "Containerized the frontend for reproducible deployment."
+    ],
+
+    "stack": [
+      "React",
+      "JavaScript",
+      "Redux Toolkit",
+      "Chakra UI",
+      "Laravel",
+      "Laravel Sanctum",
+      "MySQL",
+      "Pusher",
+      "Laravel Echo",
+      "WebSockets",
+      "Axios",
+      "Docker"
+    ]
+  },
+
+  {
+    "slug": "medical-appointment-platform",
+    "name": "Medical Appointment Platform",
+    "category": "Frontend Web Application",
+    "description": "A responsive healthcare application connecting patients with healthcare providers through doctor discovery, appointment scheduling, notifications, and administrative interfaces.",
+    "image": "/assets/images/projects/doctor.png",
+    "github": "https://github.com/YessinEleuchi/finddoctor-client",
+    "demo": null,
+
+    "role": "Frontend Developer",
+
+    "problem": "Patients need an accessible way to discover healthcare providers and organize medical appointments, while administrators require interfaces for managing platform information and services.",
+
+    "solution": "FindDoctor provides a React-based healthcare interface with authenticated access, advanced doctor search, appointment scheduling, notifications, administrative views, and integration with a dedicated backend API.",
+
+    "architecture": "The frontend is built with React 18 and Vite. React Router handles client-side navigation, Axios provides backend API communication, and Tailwind CSS handles responsive styling. The application separates pages, reusable components, context providers, and API services into dedicated modules.",
+
+    "challenges": [
+      "Designing appointment workflows that remain easy to understand for patients.",
+      "Organizing doctor search and healthcare information within a responsive interface.",
+      "Managing authentication state throughout the application.",
+      "Handling API loading states, failures, and user feedback consistently.",
+      "Supporting both patient-facing interfaces and administrative functionality."
+    ],
+
+    "decisions": [
+      "Used React to build reusable user-interface components.",
+      "Used Vite for a lightweight frontend development environment.",
+      "Separated external API communication into dedicated service modules.",
+      "Used React context for application-level state.",
+      "Used Tailwind CSS for responsive styling.",
+      "Added toast notifications, loading states, and error handling to improve user feedback."
+    ],
+
+    "results": [
+      "Built doctor discovery and advanced search interfaces.",
+      "Implemented appointment-scheduling workflows.",
+      "Integrated authentication and authorization with the backend API.",
+      "Added real-time user notifications and feedback states.",
+      "Created responsive interfaces for both users and administrators."
+    ],
+
+    "stack": [
+      "React 18",
+      "Vite",
+      "JavaScript",
+      "Tailwind CSS",
+      "React Router",
+      "Axios",
+      "React Context",
+      "REST API",
+      "ESLint"
+    ]
+  },
+
+  {
+    "slug": "quizmaster-pro",
+    "name": "QuizMaster Pro",
+    "category": "Cross-Platform Mobile Development",
+    "description": "A multilingual Flutter quiz application combining Firebase services, persistent score tracking, push notifications, localization, theming, and interactive user feedback.",
+    "image": "/assets/images/projects/flutter.png",
+    "github": "https://github.com/YessinEleuchi/QuizMaster-Pro",
+    "demo": null,
+
+    "role": "Mobile Application Developer",
+
+    "problem": "Quiz applications need more than static questions to maintain user engagement. Users expect persistent progress, immediate feedback, multilingual support, notifications, personalization, and a consistent experience across devices.",
+
+    "solution": "QuizMaster Pro delivers an interactive cross-platform quiz experience with authenticated and anonymous usage, score history, countdown timers, sound and visual feedback, multilingual interfaces, light and dark themes, push notifications, and local persistence.",
+
+    "architecture": "The application is built with Flutter and Dart using Riverpod for state management. Firebase Authentication manages user identities, Cloud Firestore stores score history, Firebase Cloud Messaging provides push notifications, and SharedPreferences stores lightweight local preferences. The codebase separates controllers, models, screens, services, localization resources, and reusable widgets.",
+
+    "challenges": [
+      "Synchronizing quiz state, timers, scoring, and user interactions.",
+      "Supporting authenticated and anonymous users.",
+      "Providing localization across English, French, and Arabic.",
+      "Persisting score history remotely while retaining local application preferences.",
+      "Handling push and local notifications across mobile application states.",
+      "Maintaining responsive layouts across different screen sizes."
+    ],
+
+    "decisions": [
+      "Used Flutter to maintain a single cross-platform mobile codebase.",
+      "Used Riverpod for predictable application state management.",
+      "Used Firebase Authentication for both email/password and anonymous authentication.",
+      "Used Cloud Firestore to persist score history.",
+      "Used Firebase Cloud Messaging together with local notifications for user engagement.",
+      "Used SharedPreferences for lightweight local persistence.",
+      "Separated localization files from application logic to support multiple languages cleanly."
+    ],
+
+    "results": [
+      "Implemented multilingual support for English, French, and Arabic.",
+      "Added persistent score history using Firestore.",
+      "Implemented push and local notifications.",
+      "Added light and dark theme support.",
+      "Implemented timers, sound feedback, and visual celebration effects.",
+      "Structured the application into reusable controllers, services, models, screens, and widgets."
+    ],
+
+    "stack": [
+      "Flutter",
+      "Dart",
+      "Firebase Authentication",
+      "Cloud Firestore",
+      "Firebase Cloud Messaging",
+      "Riverpod",
+      "SharedPreferences",
+      "Localization",
+      "Push Notifications"
+    ]
   }
 ]
