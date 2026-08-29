@@ -1,0 +1,252 @@
+<section class="px-7 py-24 lg:py-36">
+  <div class="mx-auto max-w-6xl">
+    <!-- HEADER -->
+    <div
+      class="mb-14 flex items-end justify-between
+             border-b border-neutral-200 pb-5
+             dark:border-neutral-800"
+    >
+      <div>
+        <p
+          class="mb-3 text-[10px] font-medium
+                 uppercase tracking-[0.3em]
+                 text-neutral-400
+                 dark:text-neutral-600"
+        >
+          04 / Capabilities
+        </p>
+
+        <h2
+          class="text-3xl font-semibold
+                 tracking-[-0.04em]
+                 text-neutral-900
+                 sm:text-4xl
+                 dark:text-white"
+        >
+          How I build.
+        </h2>
+      </div>
+
+      <p
+        class="hidden max-w-xs text-right
+               text-sm leading-6
+               text-neutral-400
+               md:block dark:text-neutral-600"
+      >
+        Technologies are tools.
+        The system they create is what matters.
+      </p>
+    </div>
+
+    <div
+      class="grid border-l border-neutral-200
+             sm:grid-cols-2 lg:grid-cols-5
+             dark:border-neutral-800"
+    >
+      <!-- PRODUCT -->
+      <article class="capability">
+        <p class="capability-number">
+          01
+        </p>
+
+        <h3 class="capability-title">
+          Product
+        </h3>
+
+        <p class="capability-description">
+          Building usable, responsive and maintainable
+          product interfaces.
+        </p>
+
+        <p class="capability-stack">
+          TypeScript<br />
+          React<br />
+          Next.js
+        </p>
+      </article>
+
+      <!-- SYSTEMS -->
+      <article class="capability">
+        <p class="capability-number">
+          02
+        </p>
+
+        <h3 class="capability-title">
+          Systems
+        </h3>
+
+        <p class="capability-description">
+          APIs, application architecture,
+          background processing and business logic.
+        </p>
+
+        <p class="capability-stack">
+          Node.js<br />
+          NestJS<br />
+          Spring Boot<br />
+          FastAPI
+        </p>
+      </article>
+
+      <!-- DATA -->
+      <article class="capability">
+        <p class="capability-number">
+          03
+        </p>
+
+        <h3 class="capability-title">
+          Data
+        </h3>
+
+        <p class="capability-description">
+          Designing data flows and choosing
+          the right persistence model.
+        </p>
+
+        <p class="capability-stack">
+          PostgreSQL<br />
+          MongoDB<br />
+          Redis<br />
+          Qdrant
+        </p>
+      </article>
+
+      <!-- INTELLIGENCE -->
+      <article class="capability">
+        <p class="capability-number">
+          04
+        </p>
+
+        <h3 class="capability-title">
+          Intelligence
+        </h3>
+
+        <p class="capability-description">
+          Applied AI integrated into
+          real product workflows.
+        </p>
+
+        <p class="capability-stack">
+          LLM<br />
+          RAG<br />
+          Document AI<br />
+          Computer Vision
+        </p>
+      </article>
+
+      <!-- DELIVERY -->
+      <article class="capability">
+        <p class="capability-number">
+          05
+        </p>
+
+        <h3 class="capability-title">
+          Delivery
+        </h3>
+
+        <p class="capability-description">
+          Getting software from source code
+          to a reproducible deployment.
+        </p>
+
+        <p class="capability-stack">
+          Docker<br />
+          GitHub Actions<br />
+          Jenkins<br />
+          CI/CD
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .capability {
+    position: relative;
+
+    min-height: 25rem;
+
+    padding: 1.5rem;
+
+    border-right: 1px solid rgb(229 229 229);
+
+    transition:
+      background-color 300ms ease,
+      transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  :global(.dark) .capability {
+    border-color: rgb(38 38 38);
+  }
+
+  .capability:hover {
+    background: rgb(250 250 250);
+  }
+
+  :global(.dark) .capability:hover {
+    background: rgb(10 10 10);
+  }
+
+  .capability-number {
+    font-family: monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 0.2em;
+
+    color: rgb(163 163 163);
+  }
+
+  .capability-title {
+    margin-top: 4rem;
+
+    font-size: 1.35rem;
+    font-weight: 600;
+
+    letter-spacing: -0.025em;
+
+    color: rgb(23 23 23);
+  }
+
+  :global(.dark) .capability-title {
+    color: rgb(245 245 245);
+  }
+
+  .capability-description {
+    margin-top: 1rem;
+
+    font-size: 0.8rem;
+    line-height: 1.65;
+
+    color: rgb(115 115 115);
+  }
+
+  .capability-stack {
+    position: absolute;
+    bottom: 1.5rem;
+
+    font-family: monospace;
+
+    font-size: 10px;
+    line-height: 1.85;
+
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+
+    color: rgb(163 163 163);
+  }
+
+  @media (max-width: 1023px) {
+    .capability {
+      min-height: 21rem;
+
+      border-bottom:
+        1px solid rgb(229 229 229);
+    }
+
+    :global(.dark) .capability {
+      border-bottom-color:
+        rgb(38 38 38);
+    }
+  }
+</style>

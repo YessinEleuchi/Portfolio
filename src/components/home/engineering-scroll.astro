@@ -1,0 +1,1217 @@
+<section
+  id="engineering"
+  class="engineering-story relative h-[360vh]"
+>
+  <div
+    class="sticky top-0 h-screen overflow-hidden
+           bg-neutral-950 text-white"
+  >
+    <!-- THREE.JS -->
+    <div
+      id="engineering-canvas"
+      class="absolute inset-0"
+      aria-hidden="true"
+    >
+    </div>
+
+    <!-- gradient -->
+    <div
+      class="pointer-events-none absolute inset-0
+             bg-gradient-to-r
+             from-neutral-950
+             via-neutral-950/70
+             to-transparent"
+    >
+    </div>
+
+    <div
+      class="pointer-events-none absolute inset-0
+             bg-[radial-gradient(circle_at_70%_50%,transparent_0%,#0a0a0a_74%)]"
+    >
+    </div>
+
+    <!-- HEADER -->
+    <div
+      class="absolute inset-x-0 top-0 z-20
+             mx-auto flex max-w-6xl
+             items-center justify-between
+             px-7 py-8 lg:px-8"
+    >
+      <p
+        class="text-[10px] font-medium uppercase
+               tracking-[0.3em]
+               text-neutral-500"
+      >
+        02 / Engineering
+      </p>
+
+      <p
+        class="hidden font-mono text-[9px]
+               uppercase tracking-[0.22em]
+               text-neutral-700 sm:block"
+      >
+        Scroll-driven system
+      </p>
+    </div>
+
+    <!-- COPY -->
+    <div
+      class="absolute inset-0 z-20
+             mx-auto max-w-6xl
+             px-7 lg:px-8"
+    >
+      <!-- 01 -->
+      <div
+        class="engineering-stage is-active
+               absolute left-7 top-1/2
+               max-w-lg -translate-y-1/2
+               lg:left-8"
+        data-stage="0"
+      >
+        <p class="stage-number">
+          01 / Idea
+        </p>
+
+        <h2 class="stage-title">
+          Start with
+          <span>the problem.</span>
+        </h2>
+
+        <p class="stage-description">
+          Before frameworks and architecture, there is a problem
+          to understand, simplify and turn into a product direction.
+        </p>
+      </div>
+
+      <!-- 02 -->
+      <div
+        class="engineering-stage
+               absolute left-7 top-1/2
+               max-w-lg -translate-y-1/2
+               lg:left-8"
+        data-stage="1"
+      >
+        <p class="stage-number">
+          02 / Product
+        </p>
+
+        <h2 class="stage-title">
+          Give the idea
+          <span>an interface.</span>
+        </h2>
+
+        <p class="stage-description">
+          Product engineering connects user experience,
+          interaction and business logic into something
+          people can actually use.
+        </p>
+      </div>
+
+      <!-- 03 -->
+      <div
+        class="engineering-stage
+               absolute left-7 top-1/2
+               max-w-lg -translate-y-1/2
+               lg:left-8"
+        data-stage="2"
+      >
+        <p class="stage-number">
+          03 / Systems
+        </p>
+
+        <h2 class="stage-title">
+          Build what lives
+          <span>behind the screen.</span>
+        </h2>
+
+        <p class="stage-description">
+          APIs, databases, queues, workers and asynchronous
+          workflows become the infrastructure behind the product.
+        </p>
+      </div>
+
+      <!-- 04 -->
+      <div
+        class="engineering-stage
+               absolute left-7 top-1/2
+               max-w-lg -translate-y-1/2
+               lg:left-8"
+        data-stage="3"
+      >
+        <p class="stage-number">
+          04 / Intelligence
+        </p>
+
+        <h2 class="stage-title">
+          Add intelligence
+          <span>where it matters.</span>
+        </h2>
+
+        <p class="stage-description">
+          LLMs, RAG, document processing and computer vision
+          only belong in the system when they create
+          real product value.
+        </p>
+      </div>
+
+      <!-- 05 -->
+      <div
+        class="engineering-stage
+               absolute left-7 top-1/2
+               max-w-lg -translate-y-1/2
+               lg:left-8"
+        data-stage="4"
+      >
+        <p class="stage-number">
+          05 / Ship
+        </p>
+
+        <h2 class="stage-title">
+          Turn complexity
+          <span>into a system.</span>
+        </h2>
+
+        <p class="stage-description">
+          Designed, connected, tested and delivered
+          as software that can run, evolve and be maintained.
+        </p>
+      </div>
+    </div>
+
+    <!-- BOTTOM PROGRESS -->
+    <div
+      class="absolute bottom-8 left-7 right-7 z-20
+             mx-auto max-w-6xl lg:left-8 lg:right-8"
+    >
+      <div
+        class="mb-3 flex items-center justify-between
+               font-mono text-[9px] uppercase
+               tracking-[0.2em]
+               text-neutral-600"
+      >
+        <span>Idea</span>
+
+        <span id="engineering-count">
+          01 / 05
+        </span>
+
+        <span>System</span>
+      </div>
+
+      <div class="h-px w-full bg-neutral-800">
+        <div
+          id="engineering-progress"
+          class="h-px origin-left scale-x-0
+                 bg-neutral-200"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .engineering-stage {
+    pointer-events: none;
+    opacity: 0;
+    transform:
+      translateY(calc(-50% + 35px));
+    filter: blur(5px);
+
+    transition:
+      opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 750ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 600ms ease;
+  }
+
+  .engineering-stage.is-active {
+    opacity: 1;
+
+    transform:
+      translateY(-50%);
+
+    filter: blur(0);
+  }
+
+  .stage-number {
+    margin-bottom: 1.25rem;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+
+    color: rgb(115 115 115);
+  }
+
+  .stage-title {
+    max-width: 36rem;
+
+    font-size: clamp(3.2rem, 6vw, 6.8rem);
+
+    font-weight: 600;
+    line-height: 0.88;
+
+    letter-spacing: -0.065em;
+
+    color: rgb(250 250 250);
+  }
+
+  .stage-title span {
+    display: block;
+    color: rgb(82 82 82);
+  }
+
+  .stage-description {
+    max-width: 31rem;
+
+    margin-top: 2rem;
+
+    font-size: 0.95rem;
+    line-height: 1.8;
+
+    color: rgb(115 115 115);
+  }
+
+  @media (max-width: 767px) {
+    .engineering-stage {
+      top: 38%;
+    }
+
+    .stage-title {
+      font-size: clamp(3rem, 14vw, 5rem);
+    }
+
+    .stage-description {
+      max-width: 22rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .engineering-story {
+      height: 100vh;
+    }
+
+    #engineering-canvas {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import * as THREE from "three";
+
+  const section =
+    document.querySelector<HTMLElement>(".engineering-story");
+
+  const canvasContainer =
+    document.querySelector<HTMLElement>("#engineering-canvas");
+
+  const stages =
+    Array.from(
+      document.querySelectorAll<HTMLElement>(".engineering-stage")
+    );
+
+  const progressElement =
+    document.querySelector<HTMLElement>("#engineering-progress");
+
+  const countElement =
+    document.querySelector<HTMLElement>("#engineering-count");
+
+  if (
+    section &&
+    canvasContainer &&
+    !section.dataset.initialized
+  ) {
+    section.dataset.initialized = "true";
+
+    const reduceMotion =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+    if (!reduceMotion) {
+      initEngineeringScene();
+    }
+  }
+
+  function initEngineeringScene() {
+    if (!section || !canvasContainer) return;
+
+    /* ----------------------------------
+       SCENE
+    ---------------------------------- */
+
+    const scene = new THREE.Scene();
+
+    const camera =
+      new THREE.PerspectiveCamera(
+        40,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+      );
+
+    camera.position.set(0, 0, 8);
+
+    const renderer =
+      new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+      });
+
+    renderer.setPixelRatio(
+      Math.min(window.devicePixelRatio, 1.6)
+    );
+
+    renderer.setSize(
+      window.innerWidth,
+      window.innerHeight
+    );
+
+    renderer.outputColorSpace =
+      THREE.SRGBColorSpace;
+
+    canvasContainer.appendChild(
+      renderer.domElement
+    );
+
+    /* ----------------------------------
+       LIGHTS
+    ---------------------------------- */
+
+    scene.add(
+      new THREE.AmbientLight(
+        0xffffff,
+        1.5
+      )
+    );
+
+    const mainLight =
+      new THREE.DirectionalLight(
+        0xffffff,
+        4
+      );
+
+    mainLight.position.set(
+      4,
+      5,
+      5
+    );
+
+    scene.add(mainLight);
+
+    const accentLight =
+      new THREE.PointLight(
+        0xc9a875,
+        25,
+        12
+      );
+
+    accentLight.position.set(
+      2,
+      1,
+      4
+    );
+
+    scene.add(accentLight);
+
+    /* ----------------------------------
+       WORLD
+    ---------------------------------- */
+
+    const world = new THREE.Group();
+
+    world.position.x =
+      window.innerWidth > 768
+        ? 1.8
+        : 0;
+
+    scene.add(world);
+
+    /* ----------------------------------
+       CORE
+    ---------------------------------- */
+
+    const coreGeometry =
+      new THREE.IcosahedronGeometry(
+        0.65,
+        2
+      );
+
+    const coreMaterial =
+      new THREE.MeshStandardMaterial({
+        color: 0xe5e5e5,
+        metalness: 0.72,
+        roughness: 0.28,
+        flatShading: true,
+      });
+
+    const core =
+      new THREE.Mesh(
+        coreGeometry,
+        coreMaterial
+      );
+
+    world.add(core);
+
+    const wireframe =
+      new THREE.Mesh(
+        new THREE.IcosahedronGeometry(
+          0.82,
+          2
+        ),
+        new THREE.MeshBasicMaterial({
+          color: 0xc9a875,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.15,
+        })
+      );
+
+    world.add(wireframe);
+
+    /* ----------------------------------
+       ORBITAL RINGS
+    ---------------------------------- */
+
+    const ringMaterial =
+      new THREE.MeshBasicMaterial({
+        color: 0xc9a875,
+        transparent: true,
+        opacity: 0.18,
+      });
+
+    const ring1 =
+      new THREE.Mesh(
+        new THREE.TorusGeometry(
+          1.35,
+          0.006,
+          8,
+          160
+        ),
+        ringMaterial
+      );
+
+    ring1.rotation.x =
+      Math.PI / 2.7;
+
+    world.add(ring1);
+
+    const ring2 =
+      new THREE.Mesh(
+        new THREE.TorusGeometry(
+          1.75,
+          0.004,
+          8,
+          160
+        ),
+        ringMaterial.clone()
+      );
+
+    ring2.rotation.x =
+      Math.PI / 2;
+
+    ring2.rotation.y =
+      Math.PI / 3;
+
+    world.add(ring2);
+
+    /* ----------------------------------
+       SYSTEM NODES
+    ---------------------------------- */
+
+    const organicPositions = [
+      new THREE.Vector3(-2.4, 1.3, 0.3),
+      new THREE.Vector3(-1.6, -1.4, 0.5),
+      new THREE.Vector3(-0.3, 1.8, -0.4),
+      new THREE.Vector3(1.4, 1.2, 0.2),
+      new THREE.Vector3(2.5, 0.1, -0.2),
+      new THREE.Vector3(1.5, -1.4, 0.3),
+      new THREE.Vector3(0.1, -1.9, -0.4),
+      new THREE.Vector3(2.8, -1.2, 0.5),
+    ];
+
+    /*
+      Final positions = architecture / pipeline.
+    */
+    const systemPositions = [
+      new THREE.Vector3(-2.8, 1.1, 0),
+      new THREE.Vector3(-1.4, 1.1, 0),
+      new THREE.Vector3(0, 1.1, 0),
+      new THREE.Vector3(1.4, 1.1, 0),
+      new THREE.Vector3(2.8, 1.1, 0),
+
+      new THREE.Vector3(-1.4, -0.7, 0),
+      new THREE.Vector3(0, -0.7, 0),
+      new THREE.Vector3(1.4, -0.7, 0),
+    ];
+
+    const nodes: THREE.Mesh[] = [];
+
+    const nodeGeometry =
+      new THREE.BoxGeometry(
+        0.34,
+        0.34,
+        0.34
+      );
+
+    organicPositions.forEach(
+      (_, index) => {
+        const material =
+          new THREE.MeshStandardMaterial({
+            color:
+              index === 6
+                ? 0xc9a875
+                : 0xd4d4d4,
+
+            metalness: 0.55,
+            roughness: 0.32,
+
+            transparent: true,
+            opacity: 0,
+          });
+
+        const node =
+          new THREE.Mesh(
+            nodeGeometry,
+            material
+          );
+
+        node.scale.setScalar(0.001);
+
+        world.add(node);
+
+        nodes.push(node);
+      }
+    );
+
+    /* ----------------------------------
+       CONNECTIONS
+    ---------------------------------- */
+
+    const connections = [
+      [0, 1],
+      [1, 2],
+      [2, 3],
+      [3, 4],
+
+      [1, 5],
+      [2, 6],
+      [3, 7],
+
+      [5, 6],
+      [6, 7],
+    ];
+
+    const linePositions =
+      new Float32Array(
+        connections.length * 6
+      );
+
+    const lineGeometry =
+      new THREE.BufferGeometry();
+
+    lineGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(
+        linePositions,
+        3
+      )
+    );
+
+    const lineMaterial =
+      new THREE.LineBasicMaterial({
+        color: 0x737373,
+        transparent: true,
+        opacity: 0,
+      });
+
+    const lines =
+      new THREE.LineSegments(
+        lineGeometry,
+        lineMaterial
+      );
+
+    world.add(lines);
+
+    /* ----------------------------------
+       DATA PACKET
+    ---------------------------------- */
+
+    const packet =
+      new THREE.Mesh(
+        new THREE.SphereGeometry(
+          0.055,
+          20,
+          20
+        ),
+        new THREE.MeshBasicMaterial({
+          color: 0xc9a875,
+          transparent: true,
+          opacity: 0,
+        })
+      );
+
+    world.add(packet);
+
+    /* ----------------------------------
+       BACKGROUND GRID
+    ---------------------------------- */
+
+    const grid =
+      new THREE.GridHelper(
+        16,
+        32,
+        0x404040,
+        0x262626
+      );
+
+    grid.position.y = -2.8;
+
+    const gridMaterial =
+      grid.material as THREE.Material;
+
+    gridMaterial.transparent = true;
+    gridMaterial.opacity = 0.13;
+
+    scene.add(grid);
+
+    /* ----------------------------------
+       POINTER
+    ---------------------------------- */
+
+    let pointerX = 0;
+    let pointerY = 0;
+
+    function onPointerMove(
+      event: PointerEvent
+    ) {
+      pointerX =
+        event.clientX /
+          window.innerWidth -
+        0.5;
+
+      pointerY =
+        event.clientY /
+          window.innerHeight -
+        0.5;
+    }
+
+    window.addEventListener(
+      "pointermove",
+      onPointerMove
+    );
+
+    /* ----------------------------------
+       SCROLL
+    ---------------------------------- */
+
+    let targetProgress = 0;
+    let currentProgress = 0;
+
+    function calculateScroll() {
+      if (!section) return;
+
+      const rect =
+        section.getBoundingClientRect();
+
+      const available =
+        section.offsetHeight -
+        window.innerHeight;
+
+      targetProgress =
+        THREE.MathUtils.clamp(
+          -rect.top / available,
+          0,
+          1
+        );
+
+      updateStage(targetProgress);
+    }
+
+    window.addEventListener(
+      "scroll",
+      calculateScroll,
+      {
+        passive: true,
+      }
+    );
+
+    calculateScroll();
+
+    /* ----------------------------------
+       STAGES
+    ---------------------------------- */
+
+    function updateStage(
+      progress: number
+    ) {
+      const index =
+        Math.min(
+          4,
+          Math.floor(
+            progress * 5
+          )
+        );
+
+      stages.forEach(
+        (stage, stageIndex) => {
+          stage.classList.toggle(
+            "is-active",
+            stageIndex === index
+          );
+        }
+      );
+
+      if (countElement) {
+        countElement.textContent =
+          `${String(index + 1).padStart(
+            2,
+            "0"
+          )} / 05`;
+      }
+
+      if (progressElement) {
+        progressElement.style.transform =
+          `scaleX(${progress})`;
+      }
+    }
+
+    /* ----------------------------------
+       HELPERS
+    ---------------------------------- */
+
+    function smoothstep(
+      min: number,
+      max: number,
+      value: number
+    ) {
+      const x =
+        THREE.MathUtils.clamp(
+          (value - min) /
+            (max - min),
+          0,
+          1
+        );
+
+      return (
+        x *
+        x *
+        (3 - 2 * x)
+      );
+    }
+
+    /* ----------------------------------
+       ANIMATION
+    ---------------------------------- */
+
+    let frame = 0;
+    let destroyed = false;
+
+    const clock =
+      new THREE.Clock();
+
+    function animate() {
+      if (destroyed) return;
+
+      const time =
+        clock.getElapsedTime();
+
+      currentProgress =
+        THREE.MathUtils.lerp(
+          currentProgress,
+          targetProgress,
+          0.065
+        );
+
+      const progress =
+        currentProgress;
+
+      /*
+        PHASES
+      */
+
+      const spread =
+        smoothstep(
+          0.10,
+          0.46,
+          progress
+        );
+
+      const connected =
+        smoothstep(
+          0.30,
+          0.58,
+          progress
+        );
+
+      const intelligent =
+        smoothstep(
+          0.52,
+          0.76,
+          progress
+        );
+
+      const shipping =
+        smoothstep(
+          0.76,
+          0.96,
+          progress
+        );
+
+      /*
+        CORE
+      */
+
+      core.rotation.x =
+        time * 0.12;
+
+      core.rotation.y =
+        time * 0.18;
+
+      wireframe.rotation.x =
+        -time * 0.08;
+
+      wireframe.rotation.y =
+        time * 0.1;
+
+      const coreScale =
+        THREE.MathUtils.lerp(
+          1,
+          0.62,
+          spread
+        );
+
+      core.scale.setScalar(
+        coreScale
+      );
+
+      wireframe.scale.setScalar(
+        THREE.MathUtils.lerp(
+          1,
+          0.82,
+          spread
+        )
+      );
+
+      /*
+        RINGS
+      */
+
+      ring1.rotation.z +=
+        0.001;
+
+      ring2.rotation.z -=
+        0.0008;
+
+      (
+        ring1.material as
+          THREE.MeshBasicMaterial
+      ).opacity =
+        THREE.MathUtils.lerp(
+          0.2,
+          0.05,
+          shipping
+        );
+
+      (
+        ring2.material as
+          THREE.MeshBasicMaterial
+      ).opacity =
+        THREE.MathUtils.lerp(
+          0.12,
+          0.025,
+          shipping
+        );
+
+      /*
+        NODES
+      */
+
+      nodes.forEach(
+        (node, index) => {
+          const organic =
+            organicPositions[index];
+
+          const final =
+            systemPositions[index];
+
+          const start =
+            organic
+              .clone()
+              .multiplyScalar(0.03);
+
+          const position =
+            start.lerp(
+              organic,
+              spread
+            );
+
+          position.lerp(
+            final,
+            shipping
+          );
+
+          node.position.copy(
+            position
+          );
+
+          const scale =
+            Math.max(
+              0.001,
+              spread
+            );
+
+          node.scale.setScalar(
+            scale
+          );
+
+          node.rotation.x =
+            time * 0.18 +
+            index;
+
+          node.rotation.y =
+            time * 0.12 +
+            index * 0.3;
+
+          (
+            node.material as
+              THREE.MeshStandardMaterial
+          ).opacity =
+            spread * 0.95;
+        }
+      );
+
+      /*
+        CONNECTIONS
+      */
+
+      connections.forEach(
+        (
+          [fromIndex, toIndex],
+          lineIndex
+        ) => {
+          const from =
+            nodes[fromIndex]
+              .position;
+
+          const to =
+            nodes[toIndex]
+              .position;
+
+          const offset =
+            lineIndex * 6;
+
+          linePositions[offset] =
+            from.x;
+
+          linePositions[offset + 1] =
+            from.y;
+
+          linePositions[offset + 2] =
+            from.z;
+
+          linePositions[offset + 3] =
+            to.x;
+
+          linePositions[offset + 4] =
+            to.y;
+
+          linePositions[offset + 5] =
+            to.z;
+        }
+      );
+
+      (
+        lineGeometry.attributes
+          .position as
+          THREE.BufferAttribute
+      ).needsUpdate = true;
+
+      lineMaterial.opacity =
+        connected * 0.55;
+
+      /*
+        DATA PACKET
+      */
+
+      const source =
+        nodes[1]?.position;
+
+      const destination =
+        nodes[3]?.position;
+
+      if (
+        source &&
+        destination
+      ) {
+        const travel =
+          (time * 0.28) % 1;
+
+        packet.position.lerpVectors(
+          source,
+          destination,
+          travel
+        );
+      }
+
+      (
+        packet.material as
+          THREE.MeshBasicMaterial
+      ).opacity =
+        intelligent;
+
+      packet.scale.setScalar(
+        0.7 +
+          Math.sin(
+            time * 4
+          ) *
+            0.18
+      );
+
+      /*
+        CAMERA + PARALLAX
+      */
+
+      world.rotation.y =
+        THREE.MathUtils.lerp(
+          -0.5,
+          0.28,
+          progress
+        );
+
+      world.rotation.x =
+        THREE.MathUtils.lerp(
+          0.08,
+          -0.04,
+          progress
+        );
+
+      world.rotation.y +=
+        pointerX * 0.08;
+
+      world.rotation.x +=
+        pointerY * 0.035;
+
+      camera.position.z =
+        THREE.MathUtils.lerp(
+          8,
+          7.2,
+          progress
+        );
+
+      camera.lookAt(
+        world.position
+      );
+
+      renderer.render(
+        scene,
+        camera
+      );
+
+      frame =
+        requestAnimationFrame(
+          animate
+        );
+    }
+
+    frame =
+      requestAnimationFrame(
+        animate
+      );
+
+    /* ----------------------------------
+       RESIZE
+    ---------------------------------- */
+
+    function handleResize() {
+      camera.aspect =
+        window.innerWidth /
+        window.innerHeight;
+
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+      );
+
+      world.position.x =
+        window.innerWidth > 768
+          ? 1.8
+          : 0;
+    }
+
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
+
+    /* ----------------------------------
+       CLEANUP
+    ---------------------------------- */
+
+    function destroy() {
+      if (destroyed) return;
+
+      destroyed = true;
+
+      cancelAnimationFrame(frame);
+
+      window.removeEventListener(
+        "scroll",
+        calculateScroll
+      );
+
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+
+      window.removeEventListener(
+        "pointermove",
+        onPointerMove
+      );
+
+      scene.traverse(
+        (object) => {
+          if (
+            object instanceof
+            THREE.Mesh
+          ) {
+            object.geometry?.dispose();
+
+            if (
+              Array.isArray(
+                object.material
+              )
+            ) {
+              object.material.forEach(
+                (material) =>
+                  material.dispose()
+              );
+            } else {
+              object.material?.dispose();
+            }
+          }
+        }
+      );
+
+      lineGeometry.dispose();
+      lineMaterial.dispose();
+
+      renderer.dispose();
+    }
+
+    window.addEventListener(
+      "pagehide",
+      destroy,
+      {
+        once: true,
+      }
+    );
+  }
+</script>
