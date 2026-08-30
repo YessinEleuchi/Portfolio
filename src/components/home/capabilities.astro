@@ -1,195 +1,521 @@
-<section class="px-7 py-20 lg:py-28">
-  <div class="mx-auto max-w-5xl">
+---
+import { Icon } from "astro-icon/components";
 
-    <!-- HEADER -->
-    <div class="mb-10">
+const capabilities = [
+  {
+    id: "01",
+    title: "Frontend",
+    description:
+      "Responsive product interfaces focused on usability, performance and maintainability.",
+    tech: [
+      {
+        name: "TypeScript",
+        icon: "simple-icons:typescript",
+        color: "#3178C6",
+      },
+      {
+        name: "React",
+        icon: "simple-icons:react",
+        color: "#61DAFB",
+      },
+      {
+        name: "Next.js",
+        icon: "simple-icons:nextdotjs",
+        color: "#737373",
+      },
+      {
+        name: "Angular",
+        icon: "simple-icons:angular",
+        color: "#DD0031",
+      },
+    ],
+  },
+
+  {
+    id: "02",
+    title: "Backend & Data",
+    description:
+      "APIs, business logic, asynchronous workflows and reliable data systems.",
+    tech: [
+      {
+        name: "NestJS",
+        icon: "simple-icons:nestjs",
+        color: "#E0234E",
+      },
+      {
+        name: "Node.js",
+        icon: "simple-icons:nodedotjs",
+        color: "#339933",
+      },
+      {
+        name: "FastAPI",
+        icon: "simple-icons:fastapi",
+        color: "#009688",
+      },
+      {
+        name: "Spring Boot",
+        icon: "simple-icons:springboot",
+        color: "#6DB33F",
+      },
+      {
+        name: "Laravel",
+        icon: "simple-icons:laravel",
+        color: "#FF2D20",
+      },
+      {
+        name: "PostgreSQL",
+        icon: "simple-icons:postgresql",
+        color: "#4169E1",
+      },
+      {
+        name: "MongoDB",
+        icon: "simple-icons:mongodb",
+        color: "#47A248",
+      },
+      {
+        name: "Redis",
+        icon: "simple-icons:redis",
+        color: "#FF4438",
+      },
+    ],
+  },
+
+  {
+    id: "03",
+    title: "Applied AI",
+    description:
+      "AI capabilities integrated into practical product and business workflows.",
+    tech: [
+      {
+        name: "Python",
+        icon: "simple-icons:python",
+        color: "#3776AB",
+      },
+      {
+        name: "Ollama",
+        icon: "simple-icons:ollama",
+        color: "#737373",
+      },
+      {
+        name: "Qdrant",
+        icon: "simple-icons:qdrant",
+        color: "#DC244C",
+      },
+      {
+        name: "OpenCV",
+        icon: "simple-icons:opencv",
+        color: "#5C3EE8",
+      },
+    ],
+  },
+
+  {
+    id: "04",
+    title: "Delivery",
+    description:
+      "Reproducible environments, automation and reliable software delivery.",
+    tech: [
+      {
+        name: "Docker",
+        icon: "simple-icons:docker",
+        color: "#2496ED",
+      },
+      {
+        name: "Git",
+        icon: "simple-icons:git",
+        color: "#F05032",
+      },
+      {
+        name: "GitHub Actions",
+        icon: "simple-icons:githubactions",
+        color: "#2088FF",
+      },
+      {
+        name: "Jenkins",
+        icon: "simple-icons:jenkins",
+        color: "#D24939",
+      },
+    ],
+  },
+];
+---
+
+<section
+  id="capabilities"
+  class="px-7 py-20 sm:py-24 lg:py-28"
+>
+  <div class="mx-auto max-w-6xl">
+
+    <!-- ==================================================
+         HEADER
+    =================================================== -->
+
+    <header
+      class="mb-12 grid gap-6
+             border-b border-neutral-200 pb-8
+             md:grid-cols-[1fr_22rem]
+             md:items-end
+             dark:border-neutral-800"
+    >
+      <div>
+        <p
+          class="mb-4 font-mono text-[10px]
+                 uppercase tracking-[0.25em]
+                 text-neutral-400
+                 dark:text-neutral-600"
+        >
+          02 / Capabilities
+        </p>
+
+        <h2
+          class="max-w-xl text-4xl font-semibold
+                 tracking-[-0.045em]
+                 text-neutral-900
+                 sm:text-5xl
+                 dark:text-white"
+        >
+          How I build.
+        </h2>
+      </div>
+
       <p
-        class="mb-2 text-[10px] font-medium uppercase
-               tracking-[0.3em] text-neutral-400
-               dark:text-neutral-600"
+        class="max-w-md text-sm leading-6
+               text-neutral-500
+               md:justify-self-end
+               dark:text-neutral-400"
       >
-        02 / Capabilities
+        I work across interfaces, backend systems,
+        applied AI and software delivery to build
+        complete, maintainable products.
+      </p>
+    </header>
+
+
+    <!-- ==================================================
+         CAPABILITIES
+    =================================================== -->
+
+    <div
+      class="divide-y divide-neutral-200
+             dark:divide-neutral-800"
+    >
+      {
+        capabilities.map((item) => (
+          <article
+            class="capability-row group
+                   grid gap-6 py-9
+                   md:grid-cols-[4rem_14rem_1fr]
+                   md:items-start"
+          >
+
+            <!-- NUMBER -->
+
+            <span
+              class="capability-number
+                     font-mono text-xs
+                     text-neutral-400
+                     dark:text-neutral-600"
+            >
+              {item.id}
+            </span>
+
+
+            <!-- TITLE -->
+
+            <div>
+              <h3
+                class="text-xl font-medium
+                       tracking-[-0.025em]
+                       text-neutral-900
+                       dark:text-neutral-100"
+              >
+                {item.title}
+              </h3>
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div>
+              <p
+                class="max-w-xl text-sm leading-6
+                       text-neutral-500
+                       dark:text-neutral-400"
+              >
+                {item.description}
+              </p>
+
+
+              <!-- TECHNOLOGIES -->
+
+              <div class="mt-5 flex flex-wrap gap-2">
+                {
+                  item.tech.map((tech) => (
+                    <div
+                      class="tech-pill
+                             inline-flex items-center gap-2
+                             rounded-lg
+                             border border-neutral-200
+                             bg-neutral-50
+                             px-3 py-2
+                             dark:border-neutral-800
+                             dark:bg-neutral-900"
+                      style={`--tech-color: ${tech.color};`}
+                    >
+                      <Icon
+                        name={tech.icon}
+                        class="tech-icon
+                               h-3.5 w-3.5
+                               shrink-0
+                               text-neutral-500
+                               dark:text-neutral-400"
+                      />
+
+                      <span
+                        class="tech-name
+                               text-xs font-medium
+                               text-neutral-600
+                               dark:text-neutral-300"
+                      >
+                        {tech.name}
+                      </span>
+                    </div>
+                  ))
+                }
+              </div>
+
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+
+    <!-- ==================================================
+         FOOTER
+    =================================================== -->
+
+    <footer
+      class="mt-8 flex items-center
+             justify-between gap-6
+             border-t border-neutral-200 pt-6
+             dark:border-neutral-800"
+    >
+      <p
+        class="text-xs
+               text-neutral-400
+               dark:text-neutral-500"
+      >
+        Technologies evolve. Engineering principles remain.
       </p>
 
-      <h2
-        class="text-3xl font-semibold tracking-[-0.04em]
-               text-neutral-900 sm:text-4xl dark:text-white"
+      <span
+        class="hidden
+               font-mono text-[10px]
+               uppercase tracking-[0.2em]
+               text-neutral-300
+               sm:block
+               dark:text-neutral-700"
       >
-        What I work with.
-      </h2>
-    </div>
+        Software Engineering
+      </span>
+    </footer>
 
-    <!-- CAPABILITIES -->
-    <div class="grid gap-px overflow-hidden rounded-xl
-                border border-neutral-200 bg-neutral-200
-                sm:grid-cols-2
-                dark:border-neutral-800 dark:bg-neutral-800">
-
-      <!-- FRONTEND -->
-      <article class="capability">
-        <span class="capability-number">01</span>
-
-        <h3>Frontend</h3>
-
-        <p>
-          Responsive and maintainable interfaces for modern web products.
-        </p>
-
-        <div class="stack">
-          <span>TypeScript</span>
-          <span>React</span>
-          <span>Next.js</span>
-          <span>Angular</span>
-        </div>
-      </article>
-
-      <!-- BACKEND -->
-      <article class="capability">
-        <span class="capability-number">02</span>
-
-        <h3>Backend & Data</h3>
-
-        <p>
-          APIs, business logic, asynchronous workflows and data systems.
-        </p>
-
-        <div class="stack">
-          <span>NestJS</span>
-          <span>FastAPI</span>
-          <span>Spring Boot</span>
-          <span>PostgreSQL</span>
-          <span>MongoDB</span>
-          <span>Redis</span>
-        </div>
-      </article>
-
-      <!-- AI -->
-      <article class="capability">
-        <span class="capability-number">03</span>
-
-        <h3>AI</h3>
-
-        <p>
-          Applied AI integrated into practical product workflows.
-        </p>
-
-        <div class="stack">
-          <span>LLM</span>
-          <span>RAG</span>
-          <span>Document AI</span>
-          <span>Computer Vision</span>
-          <span>Qdrant</span>
-        </div>
-      </article>
-
-      <!-- DELIVERY -->
-      <article class="capability">
-        <span class="capability-number">04</span>
-
-        <h3>Delivery</h3>
-
-        <p>
-          Reproducible environments and automated software delivery.
-        </p>
-
-        <div class="stack">
-          <span>Docker</span>
-          <span>Git</span>
-          <span>GitHub Actions</span>
-          <span>Jenkins</span>
-          <span>CI/CD</span>
-        </div>
-      </article>
-
-    </div>
   </div>
 </section>
 
+
 <style>
-  .capability {
-    background: white;
-    padding: 1.75rem;
+  /* ==================================================
+     CAPABILITY ROW
+  ================================================== */
+
+  .capability-row {
     transition:
-      background-color 250ms ease,
-      transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+      background-color 300ms ease;
   }
 
-  :global(.dark) .capability {
-    background: rgb(10 10 10);
-  }
-
-  .capability:hover {
-    background: rgb(250 250 250);
-  }
-
-  :global(.dark) .capability:hover {
-    background: rgb(15 15 15);
-  }
 
   .capability-number {
-    display: block;
-
-    margin-bottom: 2rem;
-
-    font-family: monospace;
-    font-size: 9px;
-
-    letter-spacing: 0.2em;
-
-    color: rgb(163 163 163);
+    transition:
+      color 250ms ease,
+      transform 300ms
+        cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .capability h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
 
-    letter-spacing: -0.025em;
-
+  .capability-row:hover
+  .capability-number {
     color: rgb(23 23 23);
+
+    transform:
+      translateX(3px);
   }
 
-  :global(.dark) .capability h3 {
+
+  :global(.dark)
+  .capability-row:hover
+  .capability-number {
     color: rgb(245 245 245);
   }
 
-  .capability p {
-    max-width: 28rem;
 
-    margin-top: 0.75rem;
+  /* ==================================================
+     TECHNOLOGY PILL
+  ================================================== */
 
-    font-size: 0.8rem;
-    line-height: 1.6;
+  .tech-pill {
+    cursor: default;
 
-    color: rgb(115 115 115);
+    transition:
+      transform 220ms
+        cubic-bezier(
+          0.22,
+          1,
+          0.36,
+          1
+        ),
+
+      border-color 220ms ease,
+      background-color 220ms ease,
+      box-shadow 220ms ease;
   }
 
-  .stack {
-    display: flex;
-    flex-wrap: wrap;
 
-    gap: 0.45rem;
-
-    margin-top: 1.5rem;
+  .tech-icon,
+  .tech-name {
+    transition:
+      color 220ms ease,
+      transform 220ms
+        cubic-bezier(
+          0.22,
+          1,
+          0.36,
+          1
+        );
   }
 
-  .stack span {
-    padding: 0.3rem 0.55rem;
 
-    border: 1px solid rgb(229 229 229);
-    border-radius: 0.4rem;
+  /* ==================================================
+     TECHNOLOGY HOVER
+  ================================================== */
 
-    font-family: monospace;
+  .tech-pill:hover {
+    transform:
+      translateY(-2px);
 
-    font-size: 9px;
+    border-color:
+      color-mix(
+        in srgb,
+        var(--tech-color) 48%,
+        rgb(229 229 229)
+      );
 
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    background:
+      color-mix(
+        in srgb,
+        var(--tech-color) 6%,
+        white
+      );
 
-    color: rgb(115 115 115);
+    box-shadow:
+      0 8px 22px
+      color-mix(
+        in srgb,
+        var(--tech-color) 9%,
+        transparent
+      );
   }
 
-  :global(.dark) .stack span {
-    border-color: rgb(38 38 38);
-    color: rgb(163 163 163);
+
+  .tech-pill:hover
+  .tech-icon {
+    color:
+      var(--tech-color);
+
+    transform:
+      scale(1.08);
+  }
+
+
+  .tech-pill:hover
+  .tech-name {
+    color:
+      var(--tech-color);
+  }
+
+
+  /* ==================================================
+     DARK MODE HOVER
+  ================================================== */
+
+  :global(.dark)
+  .tech-pill:hover {
+    border-color:
+      color-mix(
+        in srgb,
+        var(--tech-color) 48%,
+        rgb(38 38 38)
+      );
+
+    background:
+      color-mix(
+        in srgb,
+        var(--tech-color) 9%,
+        rgb(10 10 10)
+      );
+
+    box-shadow:
+      0 8px 24px
+      color-mix(
+        in srgb,
+        var(--tech-color) 8%,
+        transparent
+      );
+  }
+
+
+  /* ==================================================
+     MOBILE
+  ================================================== */
+
+  @media (max-width: 767px) {
+
+    .capability-row {
+      gap: 1rem;
+      padding-block: 2rem;
+    }
+
+
+    .capability-number {
+      margin-bottom: -0.25rem;
+    }
+
+  }
+
+
+  /* ==================================================
+     REDUCED MOTION
+  ================================================== */
+
+  @media (
+    prefers-reduced-motion:
+    reduce
+  ) {
+
+    .tech-pill,
+    .tech-icon,
+    .tech-name,
+    .capability-number {
+      transition: none;
+    }
+
+
+    .tech-pill:hover,
+    .capability-row:hover
+    .capability-number {
+      transform: none;
+    }
+
   }
 </style>

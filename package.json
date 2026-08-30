@@ -21,8 +21,10 @@
 	},
 	"packageManager": "pnpm@9.12.2",
 	"dependencies": {
+		"@iconify-json/simple-icons": "^1.2.94",
 		"@vercel/analytics": "^2.0.1",
 		"@vercel/speed-insights": "^2.0.0",
+		"astro-icon": "^1.2.0",
 		"three": "^0.185.1"
 	}
 }
