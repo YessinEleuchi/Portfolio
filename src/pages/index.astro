@@ -2,7 +2,6 @@
 import Hero from "../components/home/hero.astro";
 import EngineeringScroll from "../components/home/engineering-scroll.astro";
 import Capabilities from "../components/home/capabilities.astro";
-
 import Projects from "../components/home/projects.astro";
 import Separator from "../components/home/separator.astro";
 import Writings from "../components/home/writings.astro";
@@ -12,72 +11,91 @@ import Layout from "../layouts/main.astro";
 
 <Layout title="Yessine Eleuchi — Software Engineer | Full-Stack & Applied AI">
 
-  <!-- 01 / HERO -->
-  <Hero />
+  <main>
 
-  <!-- 02 / SCROLL-DRIVEN ENGINEERING STORY -->
-  <EngineeringScroll />
+    <!-- 01 / HERO -->
+    <Hero />
 
-  <!-- 03 / SELECTED WORK -->
-  <Separator text="Selected Work" />
-  <Projects />
+    <!-- 02 / CAPABILITIES -->
+    <Capabilities />
 
-  <!-- 04 / HOW I BUILD -->
-  <Capabilities />
+    <!-- 03 / SELECTED WORK -->
+    <Projects />
 
-  <!-- 05 / NOTES -->
-  <Separator text="Engineering Notes" />
-  <Writings />
+    <!-- 04 / ENGINEERING APPROACH -->
+    <EngineeringScroll />
 
-  <!-- 06 / FINAL CTA -->
-  <section class="px-7 py-28 lg:py-40">
-    <div
-      class="mx-auto max-w-4xl border-t border-neutral-200 pt-12
-             dark:border-neutral-800"
+    <!-- 05 / NOTES -->
+    <section id="notes" class="pt-20 lg:pt-24">
+      <Separator text="Notes" />
+      <Writings />
+    </section>
+
+    <!-- 06 / CONTACT -->
+    <section
+      id="contact"
+      class="px-7 pt-24 pb-28 lg:pt-32 lg:pb-36"
     >
       <div
-        class="flex flex-col gap-10 md:flex-row
-               md:items-end md:justify-between"
+        class="mx-auto max-w-4xl
+               border-t border-neutral-200 pt-10
+               dark:border-neutral-800"
       >
-        <div>
-          <p
-            class="mb-5 text-[11px] font-medium uppercase tracking-[0.3em]
-                   text-neutral-400 dark:text-neutral-600"
-          >
-            06 / Contact
-          </p>
+        <div
+          class="flex flex-col gap-10
+                 md:flex-row md:items-end md:justify-between"
+        >
+          <div>
+            <p
+              class="mb-4 text-[10px] font-medium uppercase
+                     tracking-[0.3em]
+                     text-neutral-400
+                     dark:text-neutral-600"
+            >
+              06 / Contact
+            </p>
 
-          <h2
-            class="max-w-3xl text-4xl font-semibold leading-[0.95]
-                   tracking-[-0.05em] text-neutral-900
-                   sm:text-5xl lg:text-6xl
+            <h2
+              class="max-w-3xl
+                     text-4xl font-semibold
+                     leading-[0.95]
+                     tracking-[-0.05em]
+                     text-neutral-900
+                     sm:text-5xl lg:text-6xl
+                     dark:text-white"
+            >
+              Have a problem
+
+              <span
+                class="block text-neutral-400
+                       dark:text-neutral-600"
+              >
+                worth building?
+              </span>
+            </h2>
+          </div>
+
+          <a
+            href="mailto:yessinelleuchi.software@gmail.com"
+            class="group inline-flex items-center gap-3
+                   text-sm font-medium
+                   text-neutral-900
                    dark:text-white"
           >
-            Have a problem
-            <span class="block text-neutral-400 dark:text-neutral-600">
-              worth building?
+            Let's talk
+
+            <span
+              class="transition-transform duration-300
+                     group-hover:translate-x-1
+                     group-hover:-translate-y-1"
+            >
+              ↗
             </span>
-          </h2>
+          </a>
         </div>
-
-        <a
-          href="mailto:yessinelleuchi.software@gmail.com"
-          class="group inline-flex items-center gap-3
-                 text-sm font-medium text-neutral-900
-                 dark:text-white"
-        >
-          Let's talk
-
-          <span
-            class="transition-transform duration-300
-                   group-hover:translate-x-1
-                   group-hover:-translate-y-1"
-          >
-            ↗
-          </span>
-        </a>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </main>
 
 </Layout>

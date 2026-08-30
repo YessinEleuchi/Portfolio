@@ -1,0 +1,156 @@
+<div id="chess-canvas-container" aria-hidden="true"></div>
+
+<style>
+  #chess-canvas-container {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  #chess-canvas-container canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>
+  import * as THREE from "three";
+
+  const container = document.getElementById("chess-canvas-container")!;
+
+  // ---------- SCENE / CAMERA / RENDERER ----------
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x000000, 8, 22);
+
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+  camera.position.set(0, 4.2, 7.5);
+  camera.lookAt(0, 0, 0);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
+  container.appendChild(renderer.domElement);
+
+  // ---------- COULEURS SELON LE THEME (light/dark) ----------
+  const isDark = () => document.documentElement.classList.contains("dark");
+
+  function getColors() {
+    return isDark()
+      ? { light: 0x3a3a3f, dark: 0x1c1c1f, ambient: 0x2a2a30, accent: 0x9a8866 }
+      : { light: 0xf5f3f0, dark: 0xdcd8d2, ambient: 0xffffff, accent: 0x8a7a5c };
+  }
+
+  // ---------- CONSTRUCTION DU DAMIER ----------
+  const boardGroup = new THREE.Group();
+  const SIZE = 8;
+  const SQUARE = 1;
+
+  let colors = getColors();
+  const lightMat = new THREE.MeshStandardMaterial({
+    color: colors.light,
+    roughness: 0.55,
+    metalness: 0.15,
+  });
+  const darkMat = new THREE.MeshStandardMaterial({
+    color: colors.dark,
+    roughness: 0.5,
+    metalness: 0.2,
+  });
+
+  const squareGeo = new THREE.BoxGeometry(SQUARE * 0.96, 0.08, SQUARE * 0.96);
+
+  for (let x = 0; x < SIZE; x++) {
+    for (let z = 0; z < SIZE; z++) {
+      const isLight = (x + z) % 2 === 0;
+      const mesh = new THREE.Mesh(squareGeo, isLight ? lightMat : darkMat);
+      mesh.position.set(x - SIZE / 2 + 0.5, 0, z - SIZE / 2 + 0.5);
+      mesh.receiveShadow = true;
+      boardGroup.add(mesh);
+    }
+  }
+
+  boardGroup.rotation.x = 0; // plateau parfaitement horizontal (vue travelling)
+  boardGroup.position.y = -1.2;
+  scene.add(boardGroup);
+
+  // ---------- LUMIÈRES ----------
+  const ambient = new THREE.AmbientLight(colors.ambient, 0.7);
+  scene.add(ambient);
+
+  const keyLight = new THREE.DirectionalLight(0xffffff, 0.9);
+  keyLight.position.set(4, 6, 3);
+  keyLight.castShadow = true;
+  scene.add(keyLight);
+
+  const rimLight = new THREE.PointLight(colors.accent, 0.6, 15);
+  rimLight.position.set(-3, 2, -4);
+  scene.add(rimLight);
+
+  // ---------- SCROLL → CAMÉRA (effet travelling) ----------
+  let targetZ = 7.5;
+  let targetY = 4.2;
+  let targetRotX = -0.35;
+
+  function updateCameraTarget() {
+    const scrollRatio = Math.min(
+      window.scrollY / (document.body.scrollHeight - window.innerHeight),
+      1
+    );
+    targetZ = 7.5 - scrollRatio * 4.5;   // avance vers le plateau
+    targetY = 4.2 - scrollRatio * 2.2;    // descend progressivement
+    targetRotX = -0.35 + scrollRatio * 0.15;
+  }
+
+  window.addEventListener("scroll", updateCameraTarget, { passive: true });
+  updateCameraTarget();
+
+  // ---------- RESIZE ----------
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // ---------- OBSERVATEUR DE THEME (dark mode toggle) ----------
+  const themeObserver = new MutationObserver(() => {
+    colors = getColors();
+    lightMat.color.set(colors.light);
+    darkMat.color.set(colors.dark);
+    ambient.color.set(colors.ambient);
+    rimLight.color.set(colors.accent);
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+  // ---------- BOUCLE D'ANIMATION ----------
+  let currentZ = camera.position.z;
+  let currentY = camera.position.y;
+  let currentRotX = boardGroup.rotation.x;
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // interpolation douce (lerp) pour un effet travelling fluide
+    currentZ += (targetZ - currentZ) * 0.04;
+    currentY += (targetY - currentY) * 0.04;
+    currentRotX += (targetRotX - currentRotX) * 0.04;
+
+    camera.position.z = currentZ;
+    camera.position.y = currentY;
+    camera.lookAt(0, -0.4, 0);
+
+    // léger flottement du plateau, comme suspendu
+    boardGroup.position.y = -1.2 + Math.sin(Date.now() * 0.0004) * 0.03;
+    boardGroup.rotation.y = Math.sin(Date.now() * 0.00015) * 0.04;
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+</script>

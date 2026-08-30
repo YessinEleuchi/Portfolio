@@ -3,13 +3,12 @@ import Button from "../button.astro";
 ---
 
 <section
-  class="relative isolate min-h-[calc(100svh-4rem)]
-         overflow-hidden"
+  class="relative isolate min-h-[82svh] overflow-hidden"
 >
   <!-- Large background typography -->
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-x-0 top-[18%]
+    class="pointer-events-none absolute inset-x-0 top-[15%]
            overflow-hidden select-none"
   >
     <p
@@ -25,61 +24,43 @@ import Button from "../button.astro";
     </p>
   </div>
 
-  <!-- Decorative technical lines -->
+  <!-- Decorative technical line -->
   <div
     aria-hidden="true"
     class="pointer-events-none absolute left-7 top-0
-           h-full w-px bg-neutral-100
+           h-full w-px
+           bg-neutral-100
            dark:bg-neutral-900
            lg:left-[calc((100%-72rem)/2)]"
-  >
-  </div>
+  ></div>
 
   <div
-    class="relative mx-auto flex min-h-[calc(100svh-4rem)]
-           max-w-6xl flex-col justify-center
-           px-7 py-20 sm:py-24 lg:px-8"
+    class="relative mx-auto flex min-h-[82svh]
+           max-w-6xl flex-col
+           px-7 pt-8 pb-6
+           sm:pt-10 sm:pb-8
+           lg:px-8 lg:pt-10"
   >
-    <!-- Meta -->
+    <!-- MAIN CONTENT -->
     <div
-      class="mb-16 flex items-center justify-between
-             border-b border-neutral-200 pb-4
-             dark:border-neutral-800"
-    >
-      <p
-        class="text-[10px] font-medium uppercase
-               tracking-[0.28em]
-               text-neutral-500 dark:text-neutral-500"
-      >
-        Software Engineer
-      </p>
-
-      <p
-        class="hidden text-[10px] font-medium uppercase
-               tracking-[0.28em]
-               text-neutral-400
-               sm:block dark:text-neutral-600"
-      >
-        Full-Stack · Applied AI · 2026
-      </p>
-    </div>
-
-    <div
-      class="relative grid items-center gap-14
-             md:grid-cols-[1.2fr_0.8fr]"
+      class="relative grid flex-1 items-center
+             gap-10 md:grid-cols-[1.2fr_0.8fr]
+             lg:gap-14"
     >
       <!-- HERO COPY -->
       <div class="relative z-20">
         <p
-          class="mb-6 text-xs font-medium uppercase
+          class="mb-4 text-xs font-medium uppercase
                  tracking-[0.3em]
-                 text-neutral-400 dark:text-neutral-600"
+                 text-neutral-400
+                 dark:text-neutral-600"
         >
           Yessine Eleuchi
         </p>
 
         <h1
-          class="max-w-4xl text-[clamp(3.7rem,8vw,7.5rem)]
+          class="max-w-4xl
+                 text-[clamp(3.7rem,8vw,7.5rem)]
                  font-semibold leading-[0.84]
                  tracking-[-0.07em]
                  text-neutral-900 dark:text-white"
@@ -95,8 +76,10 @@ import Button from "../button.astro";
         </h1>
 
         <p
-          class="mt-9 max-w-xl text-base leading-7
-                 text-neutral-500 dark:text-neutral-400"
+          class="mt-7 max-w-xl
+                 text-base leading-7
+                 text-neutral-500
+                 dark:text-neutral-400"
         >
           Full-stack engineer focused on product engineering,
           backend systems and applied AI — from interface and
@@ -104,10 +87,10 @@ import Button from "../button.astro";
         </p>
 
         <!-- CTA -->
-        <div class="mt-10 flex flex-wrap items-center gap-5">
+        <div class="mt-8 flex flex-wrap items-center gap-5">
           <Button
             text="View selected work"
-            link="/projects"
+            link="#selected-work"
           />
 
           <a
@@ -122,7 +105,7 @@ import Button from "../button.astro";
                    dark:text-neutral-500
                    dark:hover:text-white"
           >
-              View CV
+            View CV
 
             <span
               class="transition-transform duration-300
@@ -137,37 +120,38 @@ import Button from "../button.astro";
 
       <!-- PORTRAIT -->
       <div
-        class="relative z-10 mx-auto w-full max-w-sm
-               md:max-w-none"
+        class="relative z-10 mx-auto w-full
+               max-w-sm md:max-w-none"
       >
         <!-- Circle -->
         <div
           aria-hidden="true"
           class="absolute left-1/2 top-1/2
                  aspect-square w-[105%]
-                 -translate-x-1/2 -translate-y-1/2
+                 -translate-x-1/2
+                 -translate-y-1/2
                  rounded-full
                  border border-neutral-200
                  dark:border-neutral-800"
-        >
-        </div>
+        ></div>
 
         <div
           aria-hidden="true"
           class="absolute left-1/2 top-1/2
                  aspect-square w-[82%]
-                 -translate-x-1/2 -translate-y-1/2
+                 -translate-x-1/2
+                 -translate-y-1/2
                  rounded-full
                  border border-dashed
                  border-neutral-200
                  dark:border-neutral-800"
-        >
-        </div>
+        ></div>
 
-        <!-- availability -->
+        <!-- Availability -->
         <div
           class="absolute right-0 top-[14%] z-20
-                 flex items-center gap-2 rounded-full
+                 flex items-center gap-2
+                 rounded-full
                  border border-neutral-200
                  bg-white/80 px-3 py-2
                  backdrop-blur-md
@@ -176,17 +160,17 @@ import Button from "../button.astro";
         >
           <span class="relative flex h-2 w-2">
             <span
-              class="absolute inline-flex h-full w-full
+              class="absolute inline-flex
+                     h-full w-full
                      animate-ping rounded-full
                      bg-emerald-400 opacity-50"
-            >
-            </span>
+            ></span>
 
             <span
-              class="relative inline-flex h-2 w-2
-                     rounded-full bg-emerald-500"
-            >
-            </span>
+              class="relative inline-flex
+                     h-2 w-2 rounded-full
+                     bg-emerald-500"
+            ></span>
           </span>
 
           <span
@@ -207,30 +191,33 @@ import Button from "../button.astro";
           decoding="async"
           class="portrait-mask relative z-10
                  mx-auto block w-full
-                 max-h-[650px]
+                 max-h-[600px]
                  object-contain object-bottom"
         />
       </div>
     </div>
 
-    <!-- Bottom -->
+    <!-- TRANSITION TO NEXT SECTION -->
     <div
-      class="mt-12 flex items-center justify-between
-             border-t border-neutral-200 pt-4
+      class="flex items-center justify-between
+             border-t border-neutral-200
+             pt-4
              dark:border-neutral-800"
     >
       <p
-        class="font-mono text-[9px] uppercase
+        class="hidden font-mono
+               text-[9px] uppercase
                tracking-[0.24em]
                text-neutral-400
+               sm:block
                dark:text-neutral-600"
       >
         Product · Systems · Intelligence
       </p>
 
       <a
-        href="#engineering"
-        class="group flex items-center gap-3
+        href="#selected-work"
+        class="group ml-auto flex items-center gap-3
                text-[9px] font-medium uppercase
                tracking-[0.22em]
                text-neutral-400
@@ -239,7 +226,7 @@ import Button from "../button.astro";
                dark:text-neutral-600
                dark:hover:text-white"
       >
-        Scroll to explore
+        Selected work
 
         <span
           class="transition-transform duration-300
@@ -250,6 +237,16 @@ import Button from "../button.astro";
       </a>
     </div>
   </div>
+
+  <!-- subtle visual transition -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute
+           inset-x-0 bottom-0 h-12
+           bg-gradient-to-b
+           from-transparent to-neutral-50/40
+           dark:to-neutral-950/20"
+  ></div>
 </section>
 
 <style>
