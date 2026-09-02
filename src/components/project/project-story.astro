@@ -1,0 +1,45 @@
+---
+interface Props {
+  problem?: string;
+  solution?: string;
+}
+
+const { problem, solution }: Props = Astro.props;
+---
+
+{
+  (problem || solution) && (
+    <section id="story" class="project-story" data-project-section="story">
+      <header class="project-section-heading" data-reveal="up">
+        <p>01 / Context</p>
+        <h2>From friction to system.</h2>
+      </header>
+
+      <div class="project-story__planes">
+        {
+          problem && (
+            <article class="project-story-card project-story-card--problem" data-reveal="left">
+              <div class="project-story-card__index">01</div>
+              <p class="project-story-card__label">The problem</p>
+              <h3>A process that needed structure.</h3>
+              <p class="project-story-card__body">{problem}</p>
+              <span class="project-story-card__axis" aria-hidden="true">Problem space</span>
+            </article>
+          )
+        }
+
+        {
+          solution && (
+            <article class="project-story-card project-story-card--solution" data-reveal="right">
+              <div class="project-story-card__index">02</div>
+              <p class="project-story-card__label">The solution</p>
+              <h3>A controlled engineering workflow.</h3>
+              <p class="project-story-card__body">{solution}</p>
+              <span class="project-story-card__axis" aria-hidden="true">Solution space</span>
+            </article>
+          )
+        }
+      </div>
+    </section>
+  )
+}

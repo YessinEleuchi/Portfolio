@@ -1,0 +1,36 @@
+---
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  items: string[];
+  variant: "deck" | "chessboard" | "results";
+}
+
+const { id, eyebrow, title, items, variant }: Props = Astro.props;
+---
+
+{
+  items?.length > 0 && (
+    <section
+      id={id}
+      class:list={["project-card-section", `project-card-section--${variant}`]}
+      data-project-section={id}
+    >
+      <header class="project-section-heading" data-reveal="up">
+        <p>{eyebrow}</p>
+        <h2>{title}</h2>
+      </header>
+
+      <ol class:list={["project-card-list", `project-card-list--${variant}`]}>
+        {items.map((item, index) => (
+          <li data-reveal={variant === "chessboard" ? (index % 2 === 0 ? "left" : "right") : "up"}>
+            <span class="project-card-list__number">{String(index + 1).padStart(2, "0")}</span>
+            <p>{item}</p>
+            {variant === "results" && <span class="project-card-list__check" aria-hidden="true">✓</span>}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
+}

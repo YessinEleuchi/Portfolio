@@ -1,347 +1,117 @@
 ---
 import projects from "../../collections/projects.json";
-import Layout from "../../layouts/main.astro";
 import AIEngineering from "../../components/project/ai-engineering.astro";
+import ProjectArchitecture from "../../components/project/project-architecture.astro";
+import ProjectCards from "../../components/project/project-cards.astro";
+import ProjectHero from "../../components/project/project-hero.astro";
+import ProjectNavigation from "../../components/project/project-navigation.astro";
+import ProjectScrollEffects from "../../components/project/project-scroll-effects.astro";
+import ProjectStory from "../../components/project/project-story.astro";
+import Layout from "../../layouts/main.astro";
 
 export function getStaticPaths() {
   return projects.map((project) => ({
-    params: {
-      slug: project.slug,
-    },
-    props: {
-      project,
-    },
+    params: { slug: project.slug },
+    props: { project },
   }));
 }
 
-const { project } = Astro.props;
+const { project } = Astro.props as { project: any };
+const projectIndex = projects.findIndex((item) => item.slug === project.slug);
+const nextProject = projects[(projectIndex + 1) % projects.length];
+
+const navigationItems = [
+  { id: "overview", label: "Overview", visible: true },
+  { id: "story", label: "Problem & solution", visible: Boolean(project.problem || project.solution) },
+  { id: "architecture", label: "Architecture", visible: Boolean(project.architecture) },
+  { id: "ai-engineering", label: "AI engineering", visible: Boolean(project.aiEngineering) },
+  { id: "challenges", label: "Challenges", visible: Boolean(project.challenges?.length) },
+  { id: "decisions", label: "Decisions", visible: Boolean(project.decisions?.length) },
+  { id: "results", label: "Results", visible: Boolean(project.results?.length) },
+].filter((item) => item.visible);
 ---
 
 <Layout title={`${project.name} — Yessine Eleuchi`}>
-  <article
-    class="relative z-20 max-w-3xl mx-auto my-16 px-7 lg:px-0"
-  >
-    <!-- Back -->
-    <a
-      href="/projects"
-      class="inline-flex items-center mb-10 text-sm
-             text-neutral-500 hover:text-neutral-900
-             dark:text-neutral-400 dark:hover:text-white"
-    >
-      ← Back to projects
-    </a>
+  <div class="project-case-study">
+    <ProjectScrollEffects />
+    <ProjectNavigation items={navigationItems} />
 
-    <!-- HERO -->
-    <header class="mb-12">
+    <article class="project-case-study__main">
+      <ProjectHero project={project} />
+
+      <ProjectStory problem={project.problem} solution={project.solution} />
+
+      <ProjectArchitecture project={project} />
+
       {
-        project.category && (
-          <p
-            class="mb-3 text-sm font-medium
-                   text-neutral-500 dark:text-neutral-400"
+        project.aiEngineering && (
+          <section
+            id="ai-engineering"
+            class="project-ai-section"
+            data-project-section="ai-engineering"
+            data-reveal="up"
           >
-            {project.category}
-          </p>
+            <AIEngineering
+              ai={project.aiEngineering}
+              projectName={project.name}
+              pipelineImage={project.aiPipelineImage}
+            />
+          </section>
         )
       }
 
-      <h1
-        class="mb-5 text-4xl font-bold tracking-tight
-               md:text-5xl text-neutral-950 dark:text-white"
-      >
-        {project.name}
-      </h1>
+      <ProjectCards
+        id="challenges"
+        eyebrow="03 / Engineering pressure"
+        title="Technical challenges."
+        items={project.challenges || []}
+        variant="deck"
+      />
 
-      <p
-        class="max-w-2xl text-lg leading-relaxed
-               text-neutral-600 dark:text-neutral-400"
-      >
-        {project.description}
-      </p>
-    </header>
+      <ProjectCards
+        id="decisions"
+        eyebrow="04 / Trade-offs"
+        title="Key engineering decisions."
+        items={project.decisions || []}
+        variant="chessboard"
+      />
 
-    <!-- IMAGE -->
-    <figure class="mb-14">
-  <img
-    src={project.image}
-    alt={`${project.name} project`}
-    class="w-full rounded-2xl border
-           border-neutral-200 dark:border-neutral-800"
-  />
+      <ProjectCards
+        id="results"
+        eyebrow="05 / Outcome"
+        title="What the system delivers."
+        items={project.results || []}
+        variant="results"
+      />
 
-  {
-    project.imageCaption && (
-      <figcaption
-        class="mt-3 text-xs leading-relaxed
-               text-neutral-500 dark:text-neutral-500"
-      >
-        {project.imageCaption}
-      </figcaption>
-    )
-  }
-</figure>
-
-    <!-- META -->
-    <div
-      class="grid grid-cols-1 gap-6 pb-10 mb-12 border-b
-             sm:grid-cols-2 border-neutral-200 dark:border-neutral-800"
-    >
-      {
-        project.role && (
-          <div>
-            <p
-              class="mb-1 text-xs font-semibold uppercase tracking-wider
-                     text-neutral-400"
-            >
-              Role
-            </p>
-
-            <p
-              class="text-sm text-neutral-700 dark:text-neutral-300"
-            >
-              {project.role}
-            </p>
-          </div>
-        )
-      }
-
-      <div>
-        <p
-          class="mb-2 text-xs font-semibold uppercase tracking-wider
-                 text-neutral-400"
-        >
-          Technologies
-        </p>
-
-        <div class="flex flex-wrap gap-2">
+      <footer class="project-outro" data-reveal="up">
+        <div class="project-outro__links">
           {
-            project.stack?.map((tech) => (
-              <span
-                class="px-2.5 py-1 text-xs border rounded-md
-                       border-neutral-200 bg-neutral-50
-                       text-neutral-600
-                       dark:border-neutral-800
-                       dark:bg-neutral-900
-                       dark:text-neutral-400"
-              >
-                {tech}
-              </span>
-            ))
+            project.demo && (
+              <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                Live demo <span aria-hidden="true">↗</span>
+              </a>
+            )
+          }
+          {
+            project.github && (
+              <a href={project.github} target="_blank" rel="noopener noreferrer">
+                GitHub <span aria-hidden="true">↗</span>
+              </a>
+            )
           }
         </div>
-      </div>
-    </div>
 
-    <!-- PROBLEM -->
-    {
-      project.problem && (
-        <section class="mb-12">
-          <h2
-            class="mb-4 text-2xl font-semibold
-                   text-neutral-900 dark:text-white"
-          >
-            The problem
-          </h2>
-
-          <p
-            class="leading-7 text-neutral-600 dark:text-neutral-400"
-          >
-            {project.problem}
-          </p>
-        </section>
-      )
-    }
-
-    <!-- SOLUTION -->
-    {
-      project.solution && (
-        <section class="mb-12">
-          <h2
-            class="mb-4 text-2xl font-semibold
-                   text-neutral-900 dark:text-white"
-          >
-            The solution
-          </h2>
-
-          <p
-            class="leading-7 text-neutral-600 dark:text-neutral-400"
-          >
-            {project.solution}
-          </p>
-        </section>
-      )
-    }
-
-    <!-- ARCHITECTURE -->
-   {
-  project.architecture && (
-    <section class="mb-14">
-      <h2
-        class="mb-4 text-2xl font-semibold
-               text-neutral-900 dark:text-white"
-      >
-        System Architecture
-      </h2>
-
-      <p
-        class="leading-7 text-neutral-600 dark:text-neutral-400"
-      >
-        {project.architecture}
-      </p>
-
-      {
-        project.architectureImage && (
-          <figure class="mt-7">
-            <div
-              class="overflow-hidden border rounded-2xl
-                     border-neutral-200 dark:border-neutral-800"
-            >
-              <img
-                src={project.architectureImage}
-                alt={`${project.name} system architecture`}
-                loading="lazy"
-                decoding="async"
-                class="w-full h-auto"
-              />
-            </div>
-
-            <figcaption
-              class="mt-3 text-xs leading-relaxed
-                     text-neutral-500 dark:text-neutral-500"
-            >
-              System architecture illustrating the main services,
-              infrastructure components, and communication flows.
-            </figcaption>
-          </figure>
-        )
-      }
-    </section>
-  )
-}
-
-<!-- AI ENGINEERING -->
-{
-  project.aiEngineering && (
-    <AIEngineering
-      ai={project.aiEngineering}
-      projectName={project.name}
-      pipelineImage={project.aiPipelineImage}
-    />
-  )
-}
-
-    <!-- CHALLENGES -->
-    {
-      project.challenges?.length > 0 && (
-        <section class="mb-12">
-          <h2
-            class="mb-5 text-2xl font-semibold
-                   text-neutral-900 dark:text-white"
-          >
-            Technical challenges
-          </h2>
-
-          <ul
-            class="space-y-3 text-neutral-600 dark:text-neutral-400"
-          >
-            {project.challenges.map((challenge) => (
-              <li class="flex gap-3">
-                <span class="text-neutral-400">→</span>
-                <span>{challenge}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
-
-    <!-- DECISIONS -->
-    {
-      project.decisions?.length > 0 && (
-        <section class="mb-12">
-          <h2
-            class="mb-5 text-2xl font-semibold
-                   text-neutral-900 dark:text-white"
-          >
-            Key engineering decisions
-          </h2>
-
-          <ul
-            class="space-y-3 text-neutral-600 dark:text-neutral-400"
-          >
-            {project.decisions.map((decision) => (
-              <li class="flex gap-3">
-                <span class="text-neutral-400">→</span>
-                <span>{decision}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
-
-    <!-- RESULTS -->
-    {
-      project.results?.length > 0 && (
-        <section class="mb-14">
-          <h2
-            class="mb-5 text-2xl font-semibold
-                   text-neutral-900 dark:text-white"
-          >
-            Results
-          </h2>
-
-          <ul
-            class="space-y-3 text-neutral-600 dark:text-neutral-400"
-          >
-            {project.results.map((result) => (
-              <li class="flex gap-3">
-                <span>✓</span>
-                <span>{result}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )
-    }
-
-    <!-- LINKS -->
-    {
-      (project.github || project.demo) && (
-        <section
-          class="flex flex-wrap gap-3 pt-8 border-t
-                 border-neutral-200 dark:border-neutral-800"
-        >
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-4 py-2 text-sm font-medium border rounded-lg
-                     border-neutral-300
-                     hover:bg-neutral-100
-                     dark:border-neutral-700
-                     dark:hover:bg-neutral-900"
-            >
-              Live Demo ↗
+        {
+          nextProject && nextProject.slug !== project.slug && (
+            <a class="project-next-link" href={`/projects/${nextProject.slug}`}>
+              <span>Next project</span>
+              <strong>{nextProject.name}</strong>
+              <i aria-hidden="true">→</i>
             </a>
-          )}
-
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-4 py-2 text-sm font-medium border rounded-lg
-                     border-neutral-300
-                     hover:bg-neutral-100
-                     dark:border-neutral-700
-                     dark:hover:bg-neutral-900"
-            >
-              GitHub ↗
-            </a>
-          )}
-        </section>
-      )
-    }
-  </article>
+          )
+        }
+      </footer>
+    </article>
+  </div>
 </Layout>

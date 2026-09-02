@@ -1,0 +1,84 @@
+---
+interface Props {
+  project: any;
+}
+
+const { project }: Props = Astro.props;
+---
+
+<section id="overview" class="project-hero" data-project-section="overview">
+  <div class="project-hero__copy" data-reveal="up">
+    <a href="/projects" class="project-back-link">
+      <span aria-hidden="true">←</span>
+      All projects
+    </a>
+
+    {
+      project.category && (
+        <p class="project-eyebrow">
+          <span class="project-eyebrow__pulse" aria-hidden="true" />
+          {project.category}
+        </p>
+      )
+    }
+
+    <h1>{project.name}</h1>
+    <p class="project-hero__description">{project.description}</p>
+
+    <div class="project-hero__meta">
+      {
+        project.role && (
+          <div class="project-meta-block">
+            <span>Role</span>
+            <strong>{project.role}</strong>
+          </div>
+        )
+      }
+
+      {
+        project.stack?.length > 0 && (
+          <div class="project-meta-block">
+            <span>Core stack</span>
+            <div class="project-stack" aria-label="Project technologies">
+              {project.stack.map((technology: string) => (
+                <span>{technology}</span>
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <figure class="project-device-stage" data-reveal="hero">
+    <div class="project-device-shadow" aria-hidden="true" />
+    <div class="project-device" data-tilt-card>
+      <div class="project-device__bar" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span class="project-device__address">{project.slug}.system</span>
+      </div>
+      <div class="project-device__screen">
+        <img
+          src={project.image}
+          alt={`${project.name} project interface`}
+          loading="eager"
+          decoding="async"
+        />
+        <div class="project-device__reflection" aria-hidden="true" />
+      </div>
+    </div>
+
+    {
+      project.imageCaption && (
+        <figcaption>{project.imageCaption}</figcaption>
+      )
+    }
+  </figure>
+
+  <a class="project-scroll-cue" href="#story" aria-label="Continue to the project story">
+    <span>Scroll to explore</span>
+    <i aria-hidden="true" />
+  </a>
+</section>

@@ -1,0 +1,28 @@
+---
+interface NavigationItem {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  items: NavigationItem[];
+}
+
+const { items }: Props = Astro.props;
+---
+
+<nav class="project-navigation" aria-label="Project sections">
+  <div class="project-navigation__rail" aria-hidden="true">
+    <span data-navigation-progress />
+  </div>
+  <ol>
+    {items.map((item, index) => (
+      <li>
+        <a href={`#${item.id}`} data-nav-item={item.id}>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <strong>{item.label}</strong>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>

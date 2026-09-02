@@ -1,0 +1,70 @@
+---
+interface Props {
+  project: any;
+}
+
+const { project }: Props = Astro.props;
+---
+
+{
+  project.architecture && (
+    <section
+      id="architecture"
+      class:list={["project-architecture", !project.architectureImage && "project-architecture--text-only"]}
+      data-project-section="architecture"
+      data-architecture-scene
+    >
+      <div class="project-architecture__sticky">
+        <header class="project-section-heading project-section-heading--architecture" data-reveal="up">
+          <p>02 / System design</p>
+          <h2>Architecture, revealed in layers.</h2>
+        </header>
+
+        <div class="project-architecture__layout">
+          <div class="project-architecture__copy" data-reveal="left">
+            <p>{project.architecture}</p>
+
+            <ol class="project-architecture__steps" aria-label="Architecture reading guide">
+              <li data-architecture-step="0">
+                <span>01</span>
+                <div><strong>Interface</strong><small>Product experience and user flows</small></div>
+              </li>
+              <li data-architecture-step="1">
+                <span>02</span>
+                <div><strong>Application</strong><small>Business logic and orchestration</small></div>
+              </li>
+              <li data-architecture-step="2">
+                <span>03</span>
+                <div><strong>Infrastructure</strong><small>Data, queues and storage</small></div>
+              </li>
+              <li data-architecture-step="3">
+                <span>04</span>
+                <div><strong>Intelligence</strong><small>Specialized AI services</small></div>
+              </li>
+            </ol>
+          </div>
+
+          {
+            project.architectureImage && (
+              <figure class="project-architecture__visual" data-reveal="right">
+                <div class="project-architecture__frame">
+                  <div class="project-architecture__grid" aria-hidden="true" />
+                  <img
+                    src={project.architectureImage}
+                    alt={`${project.name} system architecture`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div class="project-architecture__scan" aria-hidden="true" />
+                </div>
+                <figcaption>
+                  {project.architectureCaption || "Main services, infrastructure components and communication flows."}
+                </figcaption>
+              </figure>
+            )
+          }
+        </div>
+      </div>
+    </section>
+  )
+}
